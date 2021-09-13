@@ -35,8 +35,8 @@ h1 h3
 
 ### Output
 ```
-true
-false
+True
+False
 ```
 
 Challenge suggested by infernus
