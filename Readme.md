@@ -24,7 +24,6 @@ switch `COLOR_OUT` to `False` in line `30`
 ```py
 input("What is the test number?")
 ```
-
 Use empty input: `input()`
 
 ----------
