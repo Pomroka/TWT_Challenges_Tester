@@ -1,6 +1,6 @@
 # Testers for TechWithTim Discord weekly challenges
 
-You can find here all my testers for weekly challenges with test cases.
+You will find here all my testers for weekly challenges with test cases.
 
 ----------
 
