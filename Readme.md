@@ -17,6 +17,8 @@ Import your solution in line `92`, and run tester file
 If you see some weird chars instead of colors in output or don't want colors
 switch `COLOR_OUT` to `False` in line `30`
 
+If there is more than one `test_cases_ch_XXx.py` file you can change import in line `28` or rename test case file removing letter after challenge number to use it.
+
 ----------
 
 **WARNING:** My tester ignores printing in `input()` but official tester **FAILS** if you print something in `input()`
