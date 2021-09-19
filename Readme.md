@@ -37,6 +37,6 @@ Use empty input: `input()`
 
 `None` in `"Input"`: Your solution print more times then there is cases.
 
-If you see `None` in `"Input"` or `"Your output"` don't check other cases until you fix problem with printing, cos "Input" and "Your output" are misaligned after first missing/extra print
+If you see `None` in `"Input"` or `"Your output"` don't check failed cases until you fix problem with printing, cos "Input" and "Your output" are misaligned after first missing/extra print
 
 `StopIteration`: Your solution try to get more input then there is test cases
