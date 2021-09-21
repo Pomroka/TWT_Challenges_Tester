@@ -95,6 +95,11 @@ def test_challenge_72(input: Callable) -> None:
 
     from pprint import pprint
 
+    print("Started testing:")
+    print(f" - Number of cases: {cyan}{len(test_out)}{reset}")
+    print(f" - Average length: {yellow}{sum(len(x) for x in test_inp) // len(test_inp):_}{reset} chars")
+    print(f" - Max length: {yellow}{max(len(x) for x in test_inp):_}{reset} chars\n")
+    
     passed = i = 0
     for i, (out, inp, exp) in enumerate(zip_longest(output, test_inp, test_out), 1):
         if out != exp:
