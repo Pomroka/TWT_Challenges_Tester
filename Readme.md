@@ -23,15 +23,15 @@ you may need to adjust other configuration settings. Read the comments on each.
 ### Custom test cases
 
 If you want use own test_cases, they must be in json format.
-```json
+```py
 [
-  [ /* this list can be in separated file for inputs only */
-    ["test case 1"], /* multiline case ["line_1", "line_2", ... ,"line_n"] */
+  [ # this list can be in separated file for inputs only 
+    ["test case 1"], # multiline case ["line_1", "line_2", ... ,"line_n"] 
     ["test case 2"],
     ...
     ["test case n"]
   ],
-  [ /* and this for output only */
+  [ # and this for output only 
     "output 1",
     "output 2",
     ...
