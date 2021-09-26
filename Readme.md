@@ -4,8 +4,46 @@ You will find here my testers for weekly challenges.
 
 ----------
 
+## <ins>How to use?</ins>
 
-## How to use? 
+## New tester (Challenge 73 and newer)
+
+Download tester file `test_challenge_XX.py` and file with test cases `test_cases.json` place them in same folder where is your file with solution.
+
+Make sure Python has right to save to this folder.
+
+This tester will create one file `temp_solution_file.py` make sure there's no such
+file in same folder or there's nothing important in it cos it will be **overwritten!**
+
+Change `SOLUTION_FILE_NAME` to your file name in `CONFIGURATION` section.
+
+If this tester wasn't prepared by me for the challenge you want to test,
+you may need to adjust other configuration settings. Read the comments on each.
+
+### Custom test cases
+
+If you want use own test_cases, they must be in json format.
+```json
+[
+  [ # this list can be in separated file for inputs only
+    ["test case 1"], # multiline case ["line_1", "line_2", ... ,"line_n"]
+    ["test case 2"],
+    ...
+    ["test case n"]
+  ],
+  [ # and this for output only
+    "output 1",
+    "output 2",
+    ...
+    "output n"
+  ]
+]
+```
+All values must be strings! Cast all ints, floats, etc. to str before dumping json!
+
+----------
+
+## Old tester (Challenge 72 and older)
 
 Download tester file `test_challenge_XX.py` and file with test cases `test_cases_ch_XX.py` place them in same folder where is your file with solution.
 
