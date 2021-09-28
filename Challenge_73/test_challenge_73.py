@@ -54,7 +54,7 @@ SOLUTION_FILE_NAME = "to_submit_ch_73.py"
 SEP_INP_OUT_TESTCASE_FILE = False
 
 # Name of file with inputs test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
-TEST_CASE_FILE = "test_cases_small.json"
+TEST_CASE_FILE = "test_cases.json"
 
 # Name of file with outputs for test cases (ignored if SEP_INP_OUT_TESTCASE_FILE is False)
 TEST_CASE_FILE_OUT = ""
