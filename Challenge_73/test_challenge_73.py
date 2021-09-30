@@ -101,6 +101,9 @@ PRINT_EXTRA_STATS = True
 # 0.05 - means update every 5% completed tests
 PROGRESS_PERCENT = 0.1
 
+# Set to False if you want to share result but don't want to share solution length
+PRINT_SOLUTION_LENGTH = True
+
 ########################################
 
 from itertools import zip_longest
@@ -152,7 +155,7 @@ class Capturing(list):
         sys.stdout = self._stdout
 
 
-def create_solution_function(path: str, file_name: str) -> bool:
+def create_solution_function(path: str, file_name: str) -> int:
     if file_name.find("/") == -1 or file_name.find("\\") == -1:
         file_name = os.path.join(path, file_name)
 
@@ -163,11 +166,13 @@ def create_solution_function(path: str, file_name: str) -> bool:
         print(" - or give relative path from Current Working Directory.\n")
         print(f"Current Working Directory is: {yellow}{os.getcwd()}{reset}")
 
-        return False
+        return 0
 
     solution = []
-    with open(file_name) as f:
+    with open(file_name, newline="") as f:
         solution = f.readlines()
+    
+    sol_len = sum(map(len, solution))
 
     tmp_name = os.path.join(path, "temp_solution_file.py")
     with open(tmp_name, "w") as f:
@@ -175,7 +180,7 @@ def create_solution_function(path: str, file_name: str) -> bool:
         for line in solution:
             f.write("    " + line)
 
-    return True
+    return sol_len
 
 
 def read_test_cases() -> tuple[List[List[str]], List[str]]:
@@ -222,6 +227,8 @@ def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases:
     print(f" - Number of cases: {cyan}{num_cases}{reset}")
     if PRINT_EXTRA_STATS:
         print_extra_stats(test_inp[:num_cases], num_cases)
+    if PRINT_SOLUTION_LENGTH:
+        print(f" - Solution length: {green}{solution_len}{reset} chars.")
     print()
 
     start = perf_counter()
@@ -283,10 +290,18 @@ def speed_test_solution_aio(
             )
     else:
         print(
-            f"\rTest for speed passed! It took your solution {yellow}{sum(times):.4f}"
-            f"{reset} seconds to complete {cyan}{loops:_}{reset} times!"
+            f"\rTest for speed passed!\n - Total time: {yellow}{sum(times):.4f}"
+            f"{reset} seconds to complete {cyan}{loops:_}{reset} times {cyan}"
+            f"{speed_num_cases}{reset} cases!"
         )
-        print(f"Average time: {yellow}{sum(times)/loops:.4f}{reset} seconds")
+        print(
+            f" - Fastest loop time: {yellow}{min(times):.4f}{reset} seconds /"
+            f" {cyan}{speed_num_cases}{reset} cases."
+        )
+        print(
+            f" - Average loop time: {yellow}{sum(times)/loops:.4f}{reset} seconds"
+            f" / {cyan}{speed_num_cases}{reset} cases."
+        )
 
 
 def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
@@ -309,6 +324,8 @@ def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases:
     print(f' - Timeout: {red}{TIMEOUT}{reset} seconds')
     if PRINT_EXTRA_STATS:
         print_extra_stats(test_inp[:num_cases], num_cases)
+    if PRINT_SOLUTION_LENGTH:
+        print(f" - Solution length: {green}{solution_len}{reset} chars.")
     print()
     
     times = []
@@ -430,8 +447,9 @@ if __name__ == "__main__":
     )
 
     path = os.path.dirname(os.path.abspath(__file__))
-
-    if not create_solution_function(path, SOLUTION_FILE_NAME):
+    solution_len = create_solution_function(path, SOLUTION_FILE_NAME)
+    
+    if not solution_len:
         print("Could not import solution!")
         exit(1)
 
