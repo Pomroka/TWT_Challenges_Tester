@@ -106,7 +106,7 @@ PROGRESS_PERCENT = 0.1
 from itertools import zip_longest
 import sys, os, platform, json, functools, operator
 from time import perf_counter
-from typing import Callable
+from typing import Callable, List
 from unittest import mock
 from io import StringIO
 from pprint import pprint
@@ -178,7 +178,7 @@ def create_solution_function(path: str, file_name: str) -> bool:
     return True
 
 
-def read_test_cases() -> tuple[list[list[str]], list[str]]:
+def read_test_cases() -> tuple[List[List[str]], List[str]]:
     with open(test_cases_file) as f:
         try:
             test_inp = json.load(f)
@@ -200,7 +200,7 @@ def read_test_cases() -> tuple[list[list[str]], list[str]]:
     return test_inp, test_out
 
 
-def print_extra_stats(test_inp: list[list[str]], num_cases: int) -> None:
+def print_extra_stats(test_inp: List[List[str]], num_cases: int) -> None:
     print(
         f" - Average length of blocks: {yellow}"
         f"{sum(len(x) for x in test_inp) // num_cases:_}{reset}"
@@ -216,11 +216,11 @@ def print_extra_stats(test_inp: list[list[str]], num_cases: int) -> None:
     )
 
 
-def test_solution_aio(test_inp: list[list[str]], test_out: list[str], num_cases: int) -> None:
-    test_inp_: list[str] = functools.reduce(operator.iconcat, test_inp[:num_cases], [])
+def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
+    test_inp_: List[str] = functools.reduce(operator.iconcat, test_inp[:num_cases], [])
 
     @mock.patch("builtins.input", side_effect=[str(num_cases)] + test_inp_)
-    def test_aio(input: Callable) -> list[str]:
+    def test_aio(input: Callable) -> List[str]:
         with Capturing() as output:
             solution()
 
@@ -253,9 +253,9 @@ def test_solution_aio(test_inp: list[list[str]], test_out: list[str], num_cases:
 
 
 def speed_test_solution_aio(
-    test_inp: list[list[str]], test_out: list[str], speed_num_cases: int
+    test_inp: List[List[str]], test_out: List[str], speed_num_cases: int
 ) -> None:
-    test_inp_: list[str] = functools.reduce(operator.iconcat, test_inp[:speed_num_cases], [])
+    test_inp_: List[str] = functools.reduce(operator.iconcat, test_inp[:speed_num_cases], [])
 
     @mock.patch("builtins.input", side_effect=[str(speed_num_cases)] + test_inp_)
     def test_for_speed_aio(input: Callable) -> bool:
@@ -297,10 +297,10 @@ def speed_test_solution_aio(
         print(f"Average time: {yellow}{sum(times)/loops:.4f}{reset} seconds")
 
 
-def test_solution_obo(test_inp: list[list[str]], test_out: list[str], num_cases: int) -> None:
-    def test_obo(test: list[str]) -> tuple[float, list[str]]:
+def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
+    def test_obo(test: List[str]) -> tuple[float, List[str]]:
         @mock.patch("builtins.input", side_effect=test)
-        def test_obo_(input: Callable) -> list[str]:
+        def test_obo_(input: Callable) -> List[str]:
             with Capturing() as output:
                 solution()
 
@@ -346,11 +346,11 @@ def test_solution_obo(test_inp: list[list[str]], test_out: list[str], num_cases:
 
 
 def speed_test_solution_obo(
-    test_inp: list[list[str]], test_out: list[str], speed_num_cases: int
+    test_inp: List[List[str]], test_out: List[str], speed_num_cases: int
 ) -> None:
-    def test_for_speed_obo(test: list[str], out: str) -> tuple[float, bool]:
+    def test_for_speed_obo(test: List[str], out: str) -> tuple[float, bool]:
         @mock.patch("builtins.input", side_effect=test)
-        def test_obo_(input: Callable) -> list[str]:
+        def test_obo_(input: Callable) -> List[str]:
             with Capturing() as output:
                 solution()
 
