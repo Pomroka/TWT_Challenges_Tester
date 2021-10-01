@@ -109,7 +109,7 @@ PRINT_SOLUTION_LENGTH = True
 from itertools import zip_longest
 import sys, os, platform, json, functools, operator
 from time import perf_counter
-from typing import Callable, List
+from typing import Callable, List, Tuple
 from unittest import mock
 from io import StringIO
 from pprint import pprint
@@ -183,7 +183,7 @@ def create_solution_function(path: str, file_name: str) -> int:
     return sol_len
 
 
-def read_test_cases() -> tuple[List[List[str]], List[str]]:
+def read_test_cases() -> Tuple[List[List[str]], List[str]]:
     with open(test_cases_file) as f:
         try:
             test_inp = json.load(f)
@@ -313,7 +313,7 @@ def speed_test_solution_aio(
 
 
 def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
-    def test_obo(test: List[str]) -> tuple[float, List[str]]:
+    def test_obo(test: List[str]) -> Tuple[float, List[str]]:
         @mock.patch("builtins.input", side_effect=test)
         def test_obo_(input: Callable) -> List[str]:
             with Capturing() as output:
@@ -365,7 +365,7 @@ def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases:
 def speed_test_solution_obo(
     test_inp: List[List[str]], test_out: List[str], speed_num_cases: int
 ) -> None:
-    def test_for_speed_obo(test: List[str], out: str) -> tuple[float, bool]:
+    def test_for_speed_obo(test: List[str], out: str) -> Tuple[float, bool]:
         @mock.patch("builtins.input", side_effect=test)
         def test_obo_(input: Callable) -> List[str]:
             with Capturing() as output:
