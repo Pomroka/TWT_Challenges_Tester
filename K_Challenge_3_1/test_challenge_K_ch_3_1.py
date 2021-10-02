@@ -345,8 +345,8 @@ def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases:
         if test_out[i] != output[0]:
             print(f"Test nr:{i + 1}\n      Input: {cyan}")
             pprint(test)
-            print(f"{reset}Your output: {red}{test_out[i]}{reset}")
-            print(f"   Expected: {green}{output[0]}{reset}\n")
+            print(f"{reset}Your output: {red}{output[0]}{reset}")
+            print(f"   Expected: {green}{test_out[i]}{reset}\n")
         else:
             passed += 1
         if sum(times) >= TIMEOUT:
