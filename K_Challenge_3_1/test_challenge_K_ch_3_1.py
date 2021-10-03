@@ -73,6 +73,16 @@ NUMBER_OF_TEST_CASES = -1
 # once and your solution need to take care of it.
 TEST_ONE_BY_ONE = True
 
+# True - if you want to print some debug information, you need set:
+#   DEBUG_TEST_NUMBER to the test number you want to debug and 
+#   ADD_1_IN_OBO to True if solution is written to take all test cases at once else to False
+DEBUG_TEST = False
+
+# Provide test number for which you want to see your debug prints. If you enter number
+# out of range, first test case will be used. (This number is 1 - indexed it is same number
+# you find when failed test case is printed in normal test). Ignored when DEBUG_TEST is False
+DEBUG_TEST_NUMBER = 10
+
 # True - if you want test your solution one test case by one test case, and solution
 # is written to take all test cases at once, this will add "1" as the first line input
 # Ignored if TEST_ONE_BY_ONE is False
@@ -417,8 +427,30 @@ def speed_test_solution_obo(
         print(f"Average time: {yellow}{sum(times)/loops:.4f}{reset} seconds")
 
 
+def debug_solution(test_inp: List[List[str]], test_out: List[str], case_number: int) -> None:
+    test = ["1"] + test_inp[case_number - 1] if ADD_1_IN_OBO else test_inp[case_number - 1]
+
+    @mock.patch("builtins.input", side_effect=test)
+    def test_debug(input: Callable) -> None:
+            solution()
+
+    print('Started testing, format "Debug":')
+    print(f" Test nr: {cyan}{case_number}{reset}")
+
+    print(f"      Input: {cyan}")
+    pprint(test)
+    print(f"{reset}   Expected: {green}{test_out[case_number - 1]}{reset}")
+    print("Your output:")
+    test_debug()
+
+
 def main() -> None:
     test_inp, test_out = read_test_cases()
+
+    if DEBUG_TEST:
+        case_number = DEBUG_TEST_NUMBER if 0 <= DEBUG_TEST_NUMBER - 1 < len(test_out) else 1
+        debug_solution(test_inp, test_out, case_number)
+        exit(0)
 
     if 0 < NUMBER_OF_TEST_CASES < len(test_out):
         num_cases = NUMBER_OF_TEST_CASES
