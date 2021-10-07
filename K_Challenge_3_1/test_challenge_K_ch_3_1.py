@@ -438,7 +438,7 @@ def debug_solution(test_inp: List[List[str]], test_out: List[str], case_number: 
     print(f" Test nr: {cyan}{case_number}{reset}")
 
     print(f"      Input: {cyan}")
-    pprint(test)
+    pprint(test_inp[case_number - 1])
     print(f"{reset}   Expected: {green}{test_out[case_number - 1]}{reset}")
     print("Your output:")
     test_debug()
