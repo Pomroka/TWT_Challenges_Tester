@@ -228,8 +228,7 @@ def print_extra_stats(test_inp: List[List[str]], test_out: List[str], num_cases:
     )
     print(f" - Min number of suspects: {yellow}{min(int(x[1]) for x in test_inp):_}{reset}")
     print(f" - Max number of suspects: {yellow}{max(int(x[1]) for x in test_inp):_}{reset}")
-    nline = "\n"
-    print(f" - Max number of matched suspects: {yellow}{max(len(x.split(nline)) for x in test_out):_}{reset}")
+    print(f" - Max number of matched suspects: {yellow}{max(len(x.split()) for x in test_out):_}{reset}")
 
 
 def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
