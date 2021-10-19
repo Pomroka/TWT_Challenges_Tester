@@ -117,7 +117,7 @@ PRINT_SOLUTION_LENGTH = True
 ########################################
 
 from itertools import zip_longest
-import sys, os, platform, json, functools, operator
+import sys, os, platform, json, functools, operator, gzip
 from time import perf_counter
 from typing import Callable, List, Tuple
 from unittest import mock
@@ -194,12 +194,21 @@ def create_solution_function(path: str, file_name: str) -> int:
 
 
 def read_test_cases() -> Tuple[List[List[str]], List[str]]:
-    with open(test_cases_file) as f:
+    if test_cases_file.endswith(".gz"):
+        with gzip.open(test_cases_file, "rb") as f:
+            data = f.read()
         try:
-            test_inp = json.load(f)
+            test_inp = json.loads(data)
         except json.decoder.JSONDecodeError:
             print(f"Test case file {yellow}{test_cases_file}{reset} is not valid JSON file!")
             exit(1)
+    else:
+        with open(test_cases_file) as f:
+            try:
+                test_inp = json.load(f)
+            except json.decoder.JSONDecodeError:
+                print(f"Test case file {yellow}{test_cases_file}{reset} is not valid JSON file!")
+                exit(1)
 
     if SEP_INP_OUT_TESTCASE_FILE:
         with open(test_out_file) as f:
