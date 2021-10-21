@@ -77,3 +77,16 @@ Use empty input: `input()`
 If you see `None` in `"Input"` or `"Your output"` don't check failed cases until you fix problem with printing, cos "Input" and "Your output" are misaligned after first missing/extra print
 
 `StopIteration`: Your solution try to get more input then there is test cases
+
+------
+
+## To download individual file from GitHub
+```sh
+# Linux
+> wget https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_76/test_cases.json
+
+# Windows 10
+> curl -o test_cases.json https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_76/test_cases.json
+```
+
+To download folder use https://downgit.github.io/#/home
