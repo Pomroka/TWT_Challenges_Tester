@@ -106,7 +106,7 @@ TIMEOUT = 300
 
 # Set to False if this tester wasn't prepared for the challenge you testing
 # or adjust prints in `print_extra_stat` function yourself
-PRINT_EXTRA_STATS = False
+PRINT_EXTRA_STATS = True
 
 # How often to update progress: must be > 0 and < 1
 # 0.1 - means update every 10% completed tests
@@ -228,18 +228,10 @@ def read_test_cases() -> Tuple[List[List[str]], List[str]]:
 
 def print_extra_stats(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
     print(
-        f" - Average DNA length: {yellow}{sum(len(x[0]) * 2 for x in test_inp) // num_cases:_}"
+        f" - Average N: {yellow}{sum(int(x[0]) for x in test_inp) // num_cases:_}"
         f"{reset}"
     )
-    print(f" - Min DNA length: {yellow}{min(len(x[0]) * 2 for x in test_inp):_}{reset}")
-    print(f" - Max DNA length: {yellow}{max(len(x[0]) * 2 for x in test_inp):_}{reset}")
-    print(
-        f" - Average number of suspects: {yellow}{sum(int(x[1]) for x in test_inp) // num_cases:_}"
-        f"{reset}"
-    )
-    print(f" - Min number of suspects: {yellow}{min(int(x[1]) for x in test_inp):_}{reset}")
-    print(f" - Max number of suspects: {yellow}{max(int(x[1]) for x in test_inp):_}{reset}")
-    print(f" - Max number of matched suspects: {yellow}{max(len(x.split()) for x in test_out):_}{reset}")
+    print(f" - Max N: {yellow}{max(int(x[0]) for x in test_inp):_}{reset}")
 
 
 def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
