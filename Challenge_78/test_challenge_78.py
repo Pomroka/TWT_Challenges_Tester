@@ -67,8 +67,8 @@ SEP_INP_OUT_TESTCASE_FILE = False
 # If test cases file is compressed, you don't need to extract it, just give name of 
 # compressed file (with .gz extension)
 # For Challenge 78 if you test solution in other language then PYTHON
-# TEST_CASE_FILE = "test_cases_s.json.gz"   # uncomment
-TEST_CASE_FILE = "test_cases.json.gz"       # comment
+TEST_CASE_FILE = "test_cases_s.json.gz"   # uncomment
+# TEST_CASE_FILE = "test_cases.json.gz"       # comment
 
 # Name of file with outputs for test cases (ignored if SEP_INP_OUT_TESTCASE_FILE is False)
 TEST_CASE_FILE_OUT = ""
@@ -560,11 +560,15 @@ if __name__ == "__main__":
     )
 
     path = os.path.dirname(os.path.abspath(__file__))
-    solution_len = create_solution_function(path, SOLUTION_FILE_NAME)
+    solution_len = 0
+    if not OTHER_LANG_COMMAND:
+        solution_len = create_solution_function(path, SOLUTION_FILE_NAME)
     
-    if not solution_len:
-        print("Could not import solution!")
-        exit(1)
+        if not solution_len:
+            print("Could not import solution!")
+            exit(1)
+            
+        from temp_solution_file import solution
 
     test_cases_file = os.path.join(path, TEST_CASE_FILE)
     if not os.path.exists(test_cases_file):
@@ -605,7 +609,5 @@ if __name__ == "__main__":
             f"to {yellow}False{reset} in configure section."
         )
         exit(1)
-
-    from temp_solution_file import solution
 
     main(path)
