@@ -57,7 +57,7 @@ SOLUTION_FILE_NAME = "to_submit_ch_78.py"
 # OTHER_LANG_COMMAND = "c78_cpp_solution.exe"
 # OTHER_LANG_COMMAND = "node solution.js"
 # For Challenge 78 use TEST_CASE_FILE = "test_cases_s.json.gz" setting bellow
-OTHER_LANG_COMMAND = ""
+OTHER_LANG_COMMAND = ""                                                                                        
 
 # True - If test cases input and output are in separate files
 # False - if they in one file
@@ -67,8 +67,8 @@ SEP_INP_OUT_TESTCASE_FILE = False
 # If test cases file is compressed, you don't need to extract it, just give name of 
 # compressed file (with .gz extension)
 # For Challenge 78 if you test solution in other language then PYTHON
-TEST_CASE_FILE = "test_cases_s.json.gz"   # uncomment
-# TEST_CASE_FILE = "test_cases.json.gz"       # comment
+# TEST_CASE_FILE = "test_cases_s.json.gz"   # uncomment
+TEST_CASE_FILE = "test_cases.json.gz"       # comment
 
 # Name of file with outputs for test cases (ignored if SEP_INP_OUT_TESTCASE_FILE is False)
 TEST_CASE_FILE_OUT = ""
@@ -124,6 +124,10 @@ PRINT_EXTRA_STATS = True
 # 0.1 - means update every 10% completed tests
 # 0.05 - means update every 5% completed tests
 PROGRESS_PERCENT = 0.1
+
+# How many failed cases to print
+# Set to -1 to print all failed cases
+NUM_FAILED = 5
 
 # Set to False if you want to share result but don't want to share solution length
 PRINT_SOLUTION_LENGTH = True
@@ -245,6 +249,8 @@ def print_extra_stats(test_inp: List[List[str]], test_out: List[str], num_cases:
         f"{reset}"
     )
     print(f" - Max N, Row, Col: {yellow}{max(((int(x[0].split()[0]) * int(x[0].split()[1]), int(x[0].split()[0]), int(x[0].split()[1])) for x in test_inp), key=lambda x: x[1] * x[2])}{reset}")
+    print(f" - Output size: {red}{sum(len(x) for x in test_out)}{reset}")
+    print(f" - Number of input lines: {red}{sum(len(x) for x in test_inp)}{reset}")
 
 
 def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
@@ -277,13 +283,17 @@ def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases:
         out = "\n".join(output[oi:oi+out_len])
         oi += out_len
         if out != exp:
-            print(f"Test nr:{i}\n      Input: {cyan}")
-            pprint(inp)
-            print(f"{reset}Your output: {red}{out}{reset}")
-            print(f"   Expected: {green}{exp}{reset}\n")
+            if i - passed <= NUM_FAILED or NUM_FAILED == -1:
+                print(f"Test nr:{i}\n      Input: {cyan}")
+                pprint(inp)
+                print(f"{reset}Your output: {red}{out}{reset}")
+                print(f"   Expected: {green}{exp}{reset}\n")
         else:
             passed += 1
 
+    if i - passed > NUM_FAILED:
+        print(f"Printed only first {yellow}{NUM_FAILED}{reset} failed cases!")
+        print(f"To change how many failed cases to print change {cyan}NUM_FAILED{reset} in configuration section.\n")
     print(f"Passed: {green if passed == i else red}{passed}/{i}{reset} tests")
     print(f"Finished in: {yellow}{end - start:.4f}{reset} seconds")
 
@@ -372,10 +382,11 @@ def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases:
         t, output = test_obo(test)
         times.append(t)
         if test_out[i] != output:
-            print(f"\rTest nr:{i + 1}             \n      Input: {cyan}")
-            pprint(test)
-            print(f"{reset}Your output: {red}{output[0]}{reset}")
-            print(f"   Expected: {green}{test_out[i]}{reset}\n")
+            if i - passed <= NUM_FAILED or NUM_FAILED == -1:
+                print(f"\rTest nr:{i + 1}             \n      Input: {cyan}")
+                pprint(test)
+                print(f"{reset}Your output: {red}{output[0]}{reset}")
+                print(f"   Expected: {green}{test_out[i]}{reset}\n")
         else:
             passed += 1
         if sum(times) >= TIMEOUT:
@@ -387,6 +398,9 @@ def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases:
                 end="",
             )
 
+    if i - passed > NUM_FAILED:
+        print(f"Printed only first {yellow}{NUM_FAILED}{reset} failed cases!")
+        print(f"To change how many failed cases to print change {cyan}NUM_FAILED{reset} in configuration section.\n")
     print(f"\rPassed: {green if passed == i + 1 else red}{passed}/{i + 1}{reset} tests")
     print(f"Finished in: {yellow}{sum(times):.4f}{reset} seconds")
 
@@ -479,14 +493,14 @@ def test_other_lang(
     if PRINT_EXTRA_STATS:
         print_extra_stats(test_inp[:num_cases], test_out[:num_cases], num_cases)
     print()
-
+    
     start = perf_counter()
     proc = subprocess.run(command, input=test_inp_, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
     end = perf_counter()
     
+    err = proc.stderr
     output = proc.stdout.split("\n")
     output = [x.strip() for x in output]
-    err = proc.stderr
     
     if err:
         print(err)
@@ -500,12 +514,17 @@ def test_other_lang(
         out = "\n".join(output[oi:oi+out_len])
         oi += out_len
         if out != exp:
-            print(f"Test nr:{i}\n      Input: {cyan}")
-            pprint(inp)
-            print(f"{reset}Your output: {red}{out}{reset}")
-            print(f"   Expected: {green}{exp}{reset}\n")
+            if i - passed <= NUM_FAILED or NUM_FAILED == -1:
+                print(f"Test nr:{i}\n      Input: {cyan}")
+                pprint(inp)
+                print(f"{reset}Your output: {red}{out}{reset}")
+                print(f"   Expected: {green}{exp}{reset}\n")
         else:
             passed += 1
+            
+    if i - passed > NUM_FAILED:
+        print(f"Printed only first {yellow}{NUM_FAILED}{reset} failed cases!")
+        print(f"To change how many failed cases to print change {cyan}NUM_FAILED{reset} in configuration section.\n")
 
     print(f"Passed: {green if passed == i else red}{passed}/{i}{reset} tests")
     print(f"Finished in: {yellow}{end - start:.4f}{reset} seconds")
