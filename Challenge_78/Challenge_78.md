@@ -33,5 +33,5 @@ Code can be written in either of these languages:
 
 - `Python 3.9` - Fully supported by my tester
 - `Ruby 3.0` - May or may not work in my tester
-- `C++ - G++ 10.3` - May or may not work in my tester
+- `C++ - G++ 10.3` - Should work with my tester same other compiled languages
 - Other languages not officially supported - May or may not work in my tester
