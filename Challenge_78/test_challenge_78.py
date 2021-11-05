@@ -56,7 +56,6 @@ SOLUTION_FILE_NAME = "to_submit_ch_78.py"
 # example: 
 # OTHER_LANG_COMMAND = "c78_cpp_solution.exe"
 # OTHER_LANG_COMMAND = "node solution.js"
-# For Challenge 78 use TEST_CASE_FILE = "test_cases_s.json.gz" setting bellow
 OTHER_LANG_COMMAND = ""                                                                                        
 
 # True - If test cases input and output are in separate files
@@ -66,9 +65,8 @@ SEP_INP_OUT_TESTCASE_FILE = False
 # Name of file with inputs test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
 # If test cases file is compressed, you don't need to extract it, just give name of 
 # compressed file (with .gz extension)
-# For Challenge 78 if you test solution in other language then PYTHON
-# TEST_CASE_FILE = "test_cases_s.json.gz"   # uncomment
-TEST_CASE_FILE = "test_cases.json.gz"       # comment
+# TEST_CASE_FILE = "test_cases_s.json.gz"   # 200 cases file
+TEST_CASE_FILE = "test_cases.json.gz"       # 500 cases file
 
 # Name of file with outputs for test cases (ignored if SEP_INP_OUT_TESTCASE_FILE is False)
 TEST_CASE_FILE_OUT = ""
