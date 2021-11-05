@@ -496,7 +496,7 @@ def test_other_lang(
     
     err = proc.stderr
     output = proc.stdout.split("\n")
-    output = [x.strip() for x in output]
+    output = [x.strip('\r') for x in output]
     
     if err:
         print(err)
@@ -513,8 +513,8 @@ def test_other_lang(
             if i - passed <= NUM_FAILED or NUM_FAILED == -1:
                 print(f"Test nr:{i}\n      Input: {cyan}")
                 pprint(inp)
-                print(f"{reset}Your output: {red}{out}{reset}")
-                print(f"   Expected: {green}{exp}{reset}\n")
+                print(f"{reset}Your output: |{red}{out}{reset}|")
+                print(f"   Expected: |{green}{exp}{reset}|\n")
         else:
             passed += 1
             
