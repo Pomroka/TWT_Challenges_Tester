@@ -461,16 +461,33 @@ def debug_solution(test_inp: List[List[str]], test_out: List[str], case_number: 
 
     @mock.patch("builtins.input", side_effect=test)
     def test_debug(input: Callable) -> None:
-            solution()
+        solution()
+    
+    command = OTHER_LANG_COMMAND if OTHER_LANG_COMMAND else "Python"
 
+    
     print('Started testing, format "Debug":')
+    print(f'Running: {yellow}{command}{reset}')
     print(f" Test nr: {cyan}{case_number}{reset}")
 
     print(f"      Input: {cyan}")
     pprint(test_inp[case_number-1])
     print(f"{reset}   Expected: {green}{test_out[case_number - 1]}{reset}")
     print("Your output:")
-    test_debug()
+    if OTHER_LANG_COMMAND:
+        test_ = "1\n" + "\n".join(test_inp[case_number - 1])
+        proc = subprocess.run(
+            command,
+            input=test_,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            universal_newlines=True
+        )
+        print(proc.stderr)
+        print(proc.stdout)
+        
+    else:
+        test_debug()
 
 
 def test_other_lang(
@@ -531,6 +548,7 @@ def main(path: str) -> None:
     
 
     if DEBUG_TEST:
+        os.chdir(path)
         case_number = DEBUG_TEST_NUMBER if 0 <= DEBUG_TEST_NUMBER - 1 < len(test_out) else 1
         debug_solution(test_inp, test_out, case_number)
         exit(0)
