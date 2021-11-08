@@ -55,7 +55,7 @@ SOLUTION_FILE_NAME = "to_submit_ch_79.py"
 # For interpreter languages give full command to run your solution
 # example: 
 # OTHER_LANG_COMMAND = "S:/Dev/C++/Tests/c79_cpp_solution.exe"
-# OTHER_LANG_COMMAND = "/home/user/c79_rust_solution/target/release/c79_rust_solution.exe"
+# OTHER_LANG_COMMAND = "/home/user/c79_rust_solution/target/release/c79_rust_solution"
 # OTHER_LANG_COMMAND = "c79_cs_solution.exe"
 # OTHER_LANG_COMMAND = "java -cp S:/Dev/Java/ c79_java_solution.Main"
 OTHER_LANG_COMMAND = ""                                                                                        
@@ -67,7 +67,7 @@ SEP_INP_OUT_TESTCASE_FILE = False
 # Name of file with inputs test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
 # If test cases file is compressed, you don't need to extract it, just give name of 
 # compressed file (with .gz extension)
-TEST_CASE_FILE = "test_cases.json"       # comment
+TEST_CASE_FILE = "test_cases.json"
 
 # Name of file with outputs for test cases (ignored if SEP_INP_OUT_TESTCASE_FILE is False)
 TEST_CASE_FILE_OUT = ""
