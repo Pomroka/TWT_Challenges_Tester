@@ -246,12 +246,11 @@ def read_test_cases() -> Tuple[List[List[str]], List[str]]:
 
 def print_extra_stats(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
     print(
-        f" - Average N (Row x Col): {yellow}{sum(int(x[0].split()[0]) * int(x[0].split()[1]) for x in test_inp) // num_cases:_}"
+        f" - Average string length: {yellow}{sum(len(x[0]) for x in test_inp) // num_cases:_}"
         f"{reset}"
     )
-    print(f" - Max N, Row, Col: {yellow}{max(((int(x[0].split()[0]) * int(x[0].split()[1]), int(x[0].split()[0]), int(x[0].split()[1])) for x in test_inp), key=lambda x: x[1] * x[2])}{reset}")
-    # print(f" - Output size: {red}{sum(len(x) for x in test_out)}{reset}")
-    # print(f" - Number of input lines: {red}{sum(len(x) for x in test_inp)}{reset}")
+    print(f" - Max string length: {yellow}{max(len(x[0]) for x in test_inp)}{reset}")
+
 
 
 def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
