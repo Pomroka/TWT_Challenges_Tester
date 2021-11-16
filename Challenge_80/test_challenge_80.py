@@ -46,27 +46,36 @@ Some possible errors:
 ########## CONFIGURATION ################
 
 # Name of your file with solution. If its not in same folder as this script
-# add absolute path or relative to CWD (Current Working Directory - directory from
-# which you run this script)
-SOLUTION_FILE_NAME = "to_submit_ch_78.py"
+# add absolute path or relative to this script file.
+# For other languages then python fill this with source code file name if
+# you want solution length to be displayed.
+# Examples:
+#   Absolute path
+# SOLUTION_FILE_NAME = "S:/Dev/C++/Tests/c80_c_solution.c"
+#   Relative path to this script file
+# SOLUTION_FILE_NAME = "Rust/C80_rust/src/main.rs"
+#   File in same folder as this script
+SOLUTION_FILE_NAME = "to_submit_ch_80.py"
 
 # Command to run your solution written in other language then Python
 # For compiled languages compile yourself and use compiled executable file name
 # For interpreter languages give full command to run your solution
-# example: 
-# OTHER_LANG_COMMAND = "c78_cpp_solution.exe"
-# OTHER_LANG_COMMAND = "node solution.js"
-OTHER_LANG_COMMAND = ""                                                                                        
+# Examples:
+# OTHER_LANG_COMMAND = "Cpp/c80_cpp.exe"
+# OTHER_LANG_COMMAND = "Cpp/c80_c.exe"
+# OTHER_LANG_COMMAND = "Rust/c80_rust/target/release/c80_rust.exe"
+# OTHER_LANG_COMMAND = "C_Sharp/c80_cs/bin/Debug/net6.0/c80_cs.exe"
+# OTHER_LANG_COMMAND = "java -cp Java/ c80_java.Main"
+OTHER_LANG_COMMAND = ""
 
 # True - If test cases input and output are in separate files
 # False - if they in one file
 SEP_INP_OUT_TESTCASE_FILE = False
 
 # Name of file with inputs test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
-# If test cases file is compressed, you don't need to extract it, just give name of 
+# If test cases file is compressed, you don't need to extract it, just give name of
 # compressed file (with .gz extension)
-# TEST_CASE_FILE = "test_cases_s.json.gz"   # 200 cases file
-TEST_CASE_FILE = "test_cases.json.gz"       # 500 cases file
+TEST_CASE_FILE = "test_cases.json"
 
 # Name of file with outputs for test cases (ignored if SEP_INP_OUT_TESTCASE_FILE is False)
 TEST_CASE_FILE_OUT = ""
@@ -86,14 +95,14 @@ NUMBER_OF_TEST_CASES = -1
 TEST_ONE_BY_ONE = False
 
 # True - if you want to print some debug information, you need set:
-#   DEBUG_TEST_NUMBER to the test number you want to debug and 
+#   DEBUG_TEST_NUMBER to the test number you want to debug and
 #   ADD_1_IN_OBO to True if solution is written to take all test cases at once else to False
 DEBUG_TEST = False
 
 # Provide test number for which you want to see your debug prints. If you enter number
 # out of range, first test case will be used. (This number is 1 - indexed it is same number
 # you find when failed test case is printed in normal test). Ignored when DEBUG_TEST is False
-DEBUG_TEST_NUMBER = 1
+DEBUG_TEST_NUMBER = 20
 
 # True - if you want test your solution one test case by one test case, and solution
 # is written to take all test cases at once, this will add "1" as the first line input
@@ -107,7 +116,7 @@ SPEED_TEST = False
 NUMBER_SPEED_TEST_CASES = -1
 
 # How many times run tests
-NUMER_OF_LOOPS = 100
+NUMER_OF_LOOPS = -1
 
 # Timeout in seconds. Will not timeout in middle of test case (if TEST_ONE_BY_ONE is False
 # will not timeout in middle of loop). Will timeout only between test cases / loops
@@ -171,18 +180,21 @@ def enable_win_term_mode() -> bool:
 
 
 class Capturing(list):
-    def __enter__(self):
+    def __enter__(self) -> "Capturing":
         self._stdout = sys.stdout
         sys.stdout = self._stringio = StringIO()
         return self
 
-    def __exit__(self, *args) -> None:
+    def __exit__(self, *args: str) -> None:
         self.extend(self._stringio.getvalue().splitlines())
         del self._stringio  # free up some memory
         sys.stdout = self._stdout
 
 
 def create_solution_function(path: str, file_name: str) -> int:
+    if not file_name:
+        return 0
+
     if file_name.find("/") == -1 or file_name.find("\\") == -1:
         file_name = os.path.join(path, file_name)
 
@@ -190,7 +202,7 @@ def create_solution_function(path: str, file_name: str) -> int:
         print(f"Can't find file {red}{file_name}{reset}!\n")
         print("Make sure:\n - your file is in same directory as this script.")
         print(" - or give absolute path to your file")
-        print(" - or give relative path from Current Working Directory.\n")
+        print(" - or give relative path from this script.\n")
         print(f"Current Working Directory is: {yellow}{os.getcwd()}{reset}")
 
         return 0
@@ -198,7 +210,7 @@ def create_solution_function(path: str, file_name: str) -> int:
     solution = []
     with open(file_name, newline="") as f:
         solution = f.readlines()
-    
+
     sol_len = sum(map(len, solution))
 
     tmp_name = os.path.join(path, "temp_solution_file.py")
@@ -217,14 +229,18 @@ def read_test_cases() -> Tuple[List[List[str]], List[str]]:
         try:
             test_inp = json.loads(data)
         except json.decoder.JSONDecodeError:
-            print(f"Test case file {yellow}{test_cases_file}{reset} is not valid JSON file!")
+            print(
+                f"Test case file {yellow}{test_cases_file}{reset} is not valid JSON file!"
+            )
             exit(1)
     else:
         with open(test_cases_file) as f:
             try:
                 test_inp = json.load(f)
             except json.decoder.JSONDecodeError:
-                print(f"Test case file {yellow}{test_cases_file}{reset} is not valid JSON file!")
+                print(
+                    f"Test case file {yellow}{test_cases_file}{reset} is not valid JSON file!"
+                )
                 exit(1)
 
     if SEP_INP_OUT_TESTCASE_FILE:
@@ -232,7 +248,9 @@ def read_test_cases() -> Tuple[List[List[str]], List[str]]:
             try:
                 test_out = json.load(f)
             except json.decoder.JSONDecodeError:
-                print(f"Test case file {yellow}{test_out_file}{reset} is not valid JSON file!")
+                print(
+                    f"Test case file {yellow}{test_out_file}{reset} is not valid JSON file!"
+                )
                 exit(1)
     else:
         test_out = test_inp[1]
@@ -241,15 +259,22 @@ def read_test_cases() -> Tuple[List[List[str]], List[str]]:
     return test_inp, test_out
 
 
-def print_extra_stats(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
+def print_extra_stats(
+    test_inp: List[List[str]], test_out: List[str], num_cases: int
+) -> None:
     print(
-        f" - Average N (Row x Col): {yellow}{sum(int(x[0].split()[0]) * int(x[0].split()[1]) for x in test_inp) // num_cases:_}"
-        f"{reset}"
+        f" - Average number of edges: {yellow}"
+        f"{sum(int(x[0]) for x in test_inp) // num_cases:_}{reset}"
     )
-    print(f" - Max N, Row, Col: {yellow}{max(((int(x[0].split()[0]) * int(x[0].split()[1]), int(x[0].split()[0]), int(x[0].split()[1])) for x in test_inp), key=lambda x: x[1] * x[2])}{reset}")
+    print(
+        f" - Max number of edges: {yellow}"
+        f"{max(int(x[0]) for x in test_inp)}{reset}"
+    )
 
 
-def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
+def test_solution_aio(
+    test_inp: List[List[str]], test_out: List[str], num_cases: int
+) -> None:
     test_inp_: List[str] = functools.reduce(operator.iconcat, test_inp[:num_cases], [])
 
     @mock.patch("builtins.input", side_effect=[str(num_cases)] + test_inp_)
@@ -260,6 +285,7 @@ def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases:
         return output
 
     print('Started testing, format "All in one":')
+    print(f"Running: {yellow}Python solution{reset}")
     print(f" - Number of cases: {cyan}{num_cases}{reset}")
     if PRINT_EXTRA_STATS:
         print_extra_stats(test_inp[:num_cases], test_out[:num_cases], num_cases)
@@ -268,7 +294,7 @@ def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases:
     print()
 
     start = perf_counter()
-    output = test_aio()
+    output = test_aio()  # type: ignore
     end = perf_counter()
 
     passed = i = oi = 0
@@ -276,7 +302,7 @@ def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases:
         zip_longest(test_inp[:num_cases], test_out[:num_cases]), 1
     ):
         out_len = len(exp.split("\n"))
-        out = "\n".join(output[oi:oi+out_len])
+        out = "\n".join(output[oi : oi + out_len])
         oi += out_len
         if out != exp:
             if i - passed <= NUM_FAILED or NUM_FAILED == -1:
@@ -289,7 +315,10 @@ def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases:
 
     if i - passed > NUM_FAILED:
         print(f"Printed only first {yellow}{NUM_FAILED}{reset} failed cases!")
-        print(f"To change how many failed cases to print change {cyan}NUM_FAILED{reset} in configuration section.\n")
+        print(
+            f"To change how many failed cases to print change {cyan}NUM_FAILED{reset}"
+            " in configuration section.\n"
+        )
     print(f"Passed: {green if passed == i else red}{passed}/{i}{reset} tests")
     print(f"Finished in: {yellow}{end - start:.4f}{reset} seconds")
 
@@ -297,7 +326,9 @@ def test_solution_aio(test_inp: List[List[str]], test_out: List[str], num_cases:
 def speed_test_solution_aio(
     test_inp: List[List[str]], test_out: List[str], speed_num_cases: int
 ) -> None:
-    test_inp_: List[str] = functools.reduce(operator.iconcat, test_inp[:speed_num_cases], [])
+    test_inp_: List[str] = functools.reduce(
+        operator.iconcat, test_inp[:speed_num_cases], []
+    )
 
     @mock.patch("builtins.input", side_effect=[str(speed_num_cases)] + test_inp_)
     def test_for_speed_aio(input: Callable) -> bool:
@@ -309,17 +340,20 @@ def speed_test_solution_aio(
 
     loops = NUMER_OF_LOOPS
     print("\nSpeed test started.")
+    print(f"Running: {yellow}Python solution{reset}")
     print(f'Testing {cyan}{speed_num_cases}{reset} cases, format "All in one":')
     print(f" - Number of loops: {cyan}{loops:_}{reset}")
     print(f" - Timeout: {red}{TIMEOUT}{reset} seconds")
     if PRINT_EXTRA_STATS:
-        print_extra_stats(test_inp[:speed_num_cases], test_out[:speed_num_cases], speed_num_cases)
+        print_extra_stats(
+            test_inp[:speed_num_cases], test_out[:speed_num_cases], speed_num_cases
+        )
     print()
-    
+
     times = []
     for i in range(loops):
         start = perf_counter()
-        passed = test_for_speed_aio()
+        passed = test_for_speed_aio()  # type: ignore
         times.append(perf_counter() - start)
         if not passed:
             print(f"{red}Failed at iteration {i + 1}!{reset}")
@@ -328,9 +362,7 @@ def speed_test_solution_aio(
             print(f"{red}Timeout at {i + 1} iteration!{reset}")
             break
         if 1 < loops <= 10 or not i % (loops * PROGRESS_PERCENT):
-            print(
-                f"\rProgress: {yellow}{i:>{len(str(loops))}}/{loops}{reset}", end=""
-            )
+            print(f"\rProgress: {yellow}{i:>{len(str(loops))}}/{loops}{reset}", end="")
     else:
         print(
             f"\rTest for speed passed!\n - Total time: {yellow}{sum(times):.4f}"
@@ -347,7 +379,9 @@ def speed_test_solution_aio(
         )
 
 
-def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases: int) -> None:
+def test_solution_obo(
+    test_inp: List[List[str]], test_out: List[str], num_cases: int
+) -> None:
     def test_obo(test: List[str]) -> Tuple[float, str]:
         @mock.patch("builtins.input", side_effect=test)
         def test_obo_(input: Callable) -> List[str]:
@@ -357,20 +391,21 @@ def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases:
             return output
 
         start = perf_counter()
-        output = test_obo_()
+        output = test_obo_()  # type: ignore
         end = perf_counter()
 
         return end - start, "\n".join(output)
 
     print('Started testing, format "One by one":')
+    print(f"Running: {yellow}Python solution{reset}")
     print(f" - Number of cases: {cyan}{num_cases}{reset}")
-    print(f' - Timeout: {red}{TIMEOUT}{reset} seconds')
+    print(f" - Timeout: {red}{TIMEOUT}{reset} seconds")
     if PRINT_EXTRA_STATS:
         print_extra_stats(test_inp[:num_cases], test_out[:num_cases], num_cases)
     if PRINT_SOLUTION_LENGTH:
         print(f" - Solution length: {green}{solution_len}{reset} chars.")
     print()
-    
+
     times = []
     passed = i = 0
     for i in range(num_cases):
@@ -396,7 +431,10 @@ def test_solution_obo(test_inp: List[List[str]], test_out: List[str], num_cases:
 
     if i - passed > NUM_FAILED:
         print(f"Printed only first {yellow}{NUM_FAILED}{reset} failed cases!")
-        print(f"To change how many failed cases to print change {cyan}NUM_FAILED{reset} in configuration section.\n")
+        print(
+            f"To change how many failed cases to print change {cyan}NUM_FAILED{reset}"
+            " in configuration section.\n"
+        )
     print(f"\rPassed: {green if passed == i + 1 else red}{passed}/{i + 1}{reset} tests")
     print(f"Finished in: {yellow}{sum(times):.4f}{reset} seconds")
 
@@ -413,18 +451,21 @@ def speed_test_solution_obo(
             return output
 
         start = perf_counter()
-        output = test_obo_()
+        output = test_obo_()  # type: ignore
         end = perf_counter()
 
         return end - start, "\n".join(output) == out
 
     loops = NUMER_OF_LOOPS
     print("\nSpeed test started.")
+    print(f"Running: {yellow}Python solution{reset}")
     print(f'Testing {cyan}{speed_num_cases}{reset} cases, format "One by one":')
     print(f" - Number of loops: {cyan}{loops:_}{reset}")
     print(f" - Timeout: {red}{TIMEOUT}{reset} seconds")
     if PRINT_EXTRA_STATS:
-        print_extra_stats(test_inp[:speed_num_cases], test_out[:speed_num_cases], speed_num_cases)
+        print_extra_stats(
+            test_inp[:speed_num_cases], test_out[:speed_num_cases], speed_num_cases
+        )
     print()
 
     times, timedout = [], False
@@ -445,9 +486,7 @@ def speed_test_solution_obo(
         if timedout:
             break
         if 1 < loops <= 10 or not i % (loops * PROGRESS_PERCENT):
-            print(
-                f"\rProgress: {yellow}{i:>{len(str(loops))}}/{loops}{reset}", end=""
-            )
+            print(f"\rProgress: {yellow}{i:>{len(str(loops))}}/{loops}{reset}", end="")
     else:
         print(
             f"\rTest for speed passed! It took your solution {yellow}{sum(times):.4f}{reset} "
@@ -456,65 +495,79 @@ def speed_test_solution_obo(
         print(f"Average time: {yellow}{sum(times)/loops:.4f}{reset} seconds")
 
 
-def debug_solution(test_inp: List[List[str]], test_out: List[str], case_number: int) -> None:
-    test = ["1"] + test_inp[case_number - 1] if ADD_1_IN_OBO else test_inp[case_number - 1]
+def debug_solution(
+    test_inp: List[List[str]], test_out: List[str], case_number: int
+) -> None:
+    test = (
+        ["1"] + test_inp[case_number - 1] if ADD_1_IN_OBO else test_inp[case_number - 1]
+    )
 
     @mock.patch("builtins.input", side_effect=test)
     def test_debug(input: Callable) -> None:
         solution()
-    
-    command = OTHER_LANG_COMMAND if OTHER_LANG_COMMAND else "Python"
 
-    
+    command = OTHER_LANG_COMMAND if OTHER_LANG_COMMAND else "Python solution"
+
     print('Started testing, format "Debug":')
-    print(f'Running: {yellow}{command}{reset}')
+    print(f"Running: {yellow}{command}{reset}")
     print(f" Test nr: {cyan}{case_number}{reset}")
 
     print(f"      Input: {cyan}")
-    pprint(test_inp[case_number-1])
+    pprint(test_inp[case_number - 1])
     print(f"{reset}   Expected: {green}{test_out[case_number - 1]}{reset}")
     print("Your output:")
     if OTHER_LANG_COMMAND:
         test_ = "1\n" + "\n".join(test_inp[case_number - 1])
         proc = subprocess.run(
-            command,
+            command.split(),
             input=test_,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            universal_newlines=True
+            universal_newlines=True,
         )
         print(proc.stderr)
         print(proc.stdout)
-        
+
     else:
-        test_debug()
+        test_debug()  # type: ignore
 
 
 def test_other_lang(
-    command: str,
-    test_inp: List[List[str]],
-    test_out: List[str],
-    num_cases: int
+    command: str, test_inp: List[List[str]], test_out: List[str], num_cases: int
 ) -> None:
     test_inp_ = (
-        f"{num_cases}\n" + "\n".join(functools.reduce(operator.iconcat, test_inp[:num_cases], [])) + "\n"
+        f"{num_cases}\n"
+        + "\n".join(functools.reduce(operator.iconcat, test_inp[:num_cases], []))
+        + "\n"
     )
-    
+
     print('Started testing, format "All in one":')
-    print(f"Running: {yellow}{command}{reset}")
+    print(f"Running: {yellow}{command[command.rfind('/') + 1:]}{reset}")
     print(f" - Number of cases: {cyan}{num_cases}{reset}")
     if PRINT_EXTRA_STATS:
         print_extra_stats(test_inp[:num_cases], test_out[:num_cases], num_cases)
+    if (
+        solution_len
+        and not SOLUTION_FILE_NAME.endswith(".py")
+        and PRINT_SOLUTION_LENGTH
+    ):
+        print(f" - Solution length: {green}{solution_len}{reset} chars.")
     print()
-    
+
     start = perf_counter()
-    proc = subprocess.run(command, input=test_inp_, stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+    proc = subprocess.run(
+        command.split(),
+        input=test_inp_,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        universal_newlines=True,
+    )
     end = perf_counter()
-    
+
     err = proc.stderr
     output = proc.stdout.split("\n")
-    output = [x.strip('\r') for x in output]
-    
+    output = [x.strip("\r") for x in output]
+
     if err:
         print(err)
         exit(1)
@@ -524,7 +577,7 @@ def test_other_lang(
         zip_longest(test_inp[:num_cases], test_out[:num_cases]), 1
     ):
         out_len = len(exp.split("\n"))
-        out = "\n".join(output[oi:oi+out_len])
+        out = "\n".join(output[oi : oi + out_len])
         oi += out_len
         if out != exp:
             if i - passed <= NUM_FAILED or NUM_FAILED == -1:
@@ -534,10 +587,13 @@ def test_other_lang(
                 print(f"   Expected: |{green}{exp}{reset}|\n")
         else:
             passed += 1
-            
+
     if i - passed > NUM_FAILED:
         print(f"Printed only first {yellow}{NUM_FAILED}{reset} failed cases!")
-        print(f"To change how many failed cases to print change {cyan}NUM_FAILED{reset} in configuration section.\n")
+        print(
+            f"To change how many failed cases to print change {cyan}NUM_FAILED{reset}"
+            " in configuration section.\n"
+        )
 
     print(f"Passed: {green if passed == i else red}{passed}/{i}{reset} tests")
     print(f"Finished in: {yellow}{end - start:.4f}{reset} seconds")
@@ -545,11 +601,11 @@ def test_other_lang(
 
 def main(path: str) -> None:
     test_inp, test_out = read_test_cases()
-    
 
     if DEBUG_TEST:
-        os.chdir(path)
-        case_number = DEBUG_TEST_NUMBER if 0 <= DEBUG_TEST_NUMBER - 1 < len(test_out) else 1
+        case_number = (
+            DEBUG_TEST_NUMBER if 0 <= DEBUG_TEST_NUMBER - 1 < len(test_out) else 1
+        )
         debug_solution(test_inp, test_out, case_number)
         exit(0)
 
@@ -562,7 +618,7 @@ def main(path: str) -> None:
         speed_num_cases = NUMBER_SPEED_TEST_CASES
     else:
         speed_num_cases = len(test_out)
-        
+
     if OTHER_LANG_COMMAND:
         os.chdir(path)
         test_other_lang(OTHER_LANG_COMMAND, test_inp, test_out, num_cases)
@@ -593,15 +649,15 @@ if __name__ == "__main__":
     )
 
     path = os.path.dirname(os.path.abspath(__file__))
-    solution_len = 0
+    os.chdir(path)
+
+    solution_len = create_solution_function(path, SOLUTION_FILE_NAME)
     if not OTHER_LANG_COMMAND:
-        solution_len = create_solution_function(path, SOLUTION_FILE_NAME)
-    
         if not solution_len:
             print("Could not import solution!")
             exit(1)
-            
-        from temp_solution_file import solution
+
+        from temp_solution_file import solution  # type: ignore
 
     test_cases_file = os.path.join(path, TEST_CASE_FILE)
     if not os.path.exists(test_cases_file):
@@ -626,7 +682,7 @@ if __name__ == "__main__":
             f"{cyan}TEST_CASE_FILE_OUT{reset} in configure section"
         )
         exit(1)
-        
+
     test_out_file = (
         os.path.join(path, TEST_CASE_FILE_OUT)
         if SEP_INP_OUT_TESTCASE_FILE
