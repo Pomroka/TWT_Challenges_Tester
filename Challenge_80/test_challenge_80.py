@@ -62,7 +62,7 @@ SOLUTION_FILE_NAME = "to_submit_ch_80.py"
 # For interpreter languages give full command to run your solution
 # Examples:
 # OTHER_LANG_COMMAND = "Cpp/c80_cpp.exe"
-# OTHER_LANG_COMMAND = "Cpp/c80_c.exe"
+# OTHER_LANG_COMMAND = "/home/user/Challenges/c80_c"
 # OTHER_LANG_COMMAND = "Rust/c80_rust/target/release/c80_rust.exe"
 # OTHER_LANG_COMMAND = "C_Sharp/c80_cs/bin/Debug/net6.0/c80_cs.exe"
 # OTHER_LANG_COMMAND = "java -cp Java/ c80_java.Main"
