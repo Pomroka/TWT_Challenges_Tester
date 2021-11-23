@@ -280,7 +280,11 @@ class Emoji:
     rocket: str = ""
     warning: str = ""
     bang: str = ""
-    
+    stop: str = ""
+    snail: str = ""
+    leopard: str = ""
+
+
 class Lang(Enum):
     PYTHON = auto()
     OTHER = auto()
@@ -306,6 +310,8 @@ def print_begin(
     num_cases: int,
     test_inp: List[List[str]],
     test_out: List[str],
+    *,
+    timeout: bool = False,
 ) -> None:
     command = OTHER_LANG_COMMAND
     
@@ -317,6 +323,8 @@ def print_begin(
     print(f"{emojis.rocket}Started testing, format {format}:")
     print(f"Running:{running}")
     print(f" - Number of cases{emojis.filebox}: {cyan}{num_cases}{reset}")
+    if timeout:
+        print(f" - Timeout: {red}{TIMEOUT}{reset} seconds{emojis.stop}")
     if PRINT_EXTRA_STATS:
         print_extra_stats(test_inp[:num_cases], test_out[:num_cases], num_cases)
     if (
@@ -328,16 +336,63 @@ def print_begin(
     print()
 
 
-def print_summary(i: int, passed: int, end: float, start: float) -> None:
+def print_summary(i: int, passed: int, time_taken: float) -> None:
     if NUM_FAILED >= 0 and i - passed > NUM_FAILED:
         print(f"{emojis.warning}Printed only first {yellow}{NUM_FAILED}{reset} failed cases!{emojis.warning}")
         print(
-            f"To change how many failed cases to print change {cyan}NUM_FAILED{reset}"
+            f"\rTo change how many failed cases to print change {cyan}NUM_FAILED{reset}"
             " in configuration section.\n"
         )
     e = f"{emojis.hundred}" if passed == i else f"{emojis.poo}"
-    print(f"Passed: {green if passed == i else red}{passed}/{i}{reset} tests{e}{emojis.bang}")
-    print(f"{emojis.stopwatch}Finished in: {yellow}{end - start:.4f}{reset} seconds")
+    print(f"\rPassed: {green if passed == i else red}{passed}/{i}{reset} tests{e}{emojis.bang}")
+    print(f"{emojis.stopwatch}Finished in: {yellow}{time_taken:.4f}{reset} seconds")
+
+
+def print_speed_summary(speed_num_cases: int, loops: int, times: List[float]) -> None:
+    print(
+            f"\rTest for speed passed{emojis.hundred}{emojis.bang if emojis.bang else '!'}\n"
+            f" - Total time: {yellow}{sum(times):.4f}"
+            f"{reset} seconds to complete {cyan}{loops:_}{reset} times {cyan}"
+            f"{speed_num_cases}{reset} cases!"
+        )
+    print(
+            f" -{emojis.leopard} Fastest loop time: {yellow}{min(times):.4f}{reset} seconds /"
+            f" {cyan}{speed_num_cases}{reset} cases."
+        )
+    print(
+            f" - {emojis.snail}Slowest loop time: {yellow}{max(times):.4f}{reset} seconds /"
+            f" {cyan}{speed_num_cases}{reset} cases."
+        )
+    print(
+            f" - {emojis.stopwatch}Average loop time: {yellow}{sum(times)/loops:.4f}{reset} seconds"
+            f" / {cyan}{speed_num_cases}{reset} cases."
+        )
+
+
+def check_result(
+    test_inp: List[List[str]],
+    test_out: List[str],
+    num_cases: int,
+    output: List[str]
+) -> Tuple[int, int]:
+    passed = i = oi = 0
+    for i, (inp, exp) in enumerate(
+        zip_longest(test_inp[:num_cases], test_out[:num_cases]), 1
+    ):
+        out_len = len(exp.split("\n"))
+        out = "\n".join(output[oi : oi + out_len])
+        oi += out_len
+        if out != exp:
+            if i - passed <= NUM_FAILED or NUM_FAILED == -1:
+                print(f"Test nr:{i}\n      Input: {cyan}")
+                pprint(inp)
+                print(f"{reset}Your output: {red}{out}{reset}")
+                print(f"   Expected: {green}{exp}{reset}\n")
+        else:
+            passed += 1
+    return passed,i
+
+########################################################################
 
 
 def test_solution_aio(
@@ -358,23 +413,9 @@ def test_solution_aio(
     output = test_aio()  # type: ignore
     end = perf_counter()
 
-    passed = i = oi = 0
-    for i, (inp, exp) in enumerate(
-        zip_longest(test_inp[:num_cases], test_out[:num_cases]), 1
-    ):
-        out_len = len(exp.split("\n"))
-        out = "\n".join(output[oi : oi + out_len])
-        oi += out_len
-        if out != exp:
-            if i - passed <= NUM_FAILED or NUM_FAILED == -1:
-                print(f"Test nr:{i}\n      Input: {cyan}")
-                pprint(inp)
-                print(f"{reset}Your output: {red}{out}{reset}")
-                print(f"   Expected: {green}{exp}{reset}\n")
-        else:
-            passed += 1
+    passed, i = check_result(test_inp, test_out, num_cases, output)
     
-    print_summary(i, passed, end, start)
+    print_summary(i, passed, end - start)
 
 
 def speed_test_solution_aio(
@@ -392,7 +433,7 @@ def speed_test_solution_aio(
 
         return "\n".join(output) == "\n".join(test_out[:speed_num_cases])
 
-    loops = NUMER_OF_LOOPS
+    loops = max(1, NUMER_OF_LOOPS)
     print("\nSpeed test started.")
     print(f"Running: {yellow}Python solution{reset}")
     print(f'Testing {cyan}{speed_num_cases}{reset} cases, format "All in one":')
@@ -418,19 +459,7 @@ def speed_test_solution_aio(
         if 1 < loops <= 10 or not i % (loops * PROGRESS_PERCENT):
             print(f"\rProgress: {yellow}{i:>{len(str(loops))}}/{loops}{reset}", end="")
     else:
-        print(
-            f"\rTest for speed passed!\n - Total time: {yellow}{sum(times):.4f}"
-            f"{reset} seconds to complete {cyan}{loops:_}{reset} times {cyan}"
-            f"{speed_num_cases}{reset} cases!"
-        )
-        print(
-            f" - Fastest loop time: {yellow}{min(times):.4f}{reset} seconds /"
-            f" {cyan}{speed_num_cases}{reset} cases."
-        )
-        print(
-            f" - Average loop time: {yellow}{sum(times)/loops:.4f}{reset} seconds"
-            f" / {cyan}{speed_num_cases}{reset} cases."
-        )
+        print_speed_summary(speed_num_cases, loops, times)
 
 
 def test_solution_obo(
@@ -450,15 +479,7 @@ def test_solution_obo(
 
         return end - start, "\n".join(output)
 
-    print('Started testing, format "One by one":')
-    print(f"Running: {yellow}Python solution{reset}")
-    print(f" - Number of cases: {cyan}{num_cases}{reset}")
-    print(f" - Timeout: {red}{TIMEOUT}{reset} seconds")
-    if PRINT_EXTRA_STATS:
-        print_extra_stats(test_inp[:num_cases], test_out[:num_cases], num_cases)
-    if PRINT_SOLUTION_LENGTH:
-        print(f" - Solution length: {green}{solution_len}{reset} chars.")
-    print()
+    print_begin("One by one", num_cases, test_inp, test_out, timeout=True)
 
     times = []
     passed = i = 0
@@ -482,15 +503,8 @@ def test_solution_obo(
                 f"\rProgress: {yellow}{i + 1:>{len(str(num_cases))}}/{num_cases}{reset}",
                 end="",
             )
-
-    if NUM_FAILED >= 0 and i - passed > NUM_FAILED:
-        print(f"Printed only first {yellow}{NUM_FAILED}{reset} failed cases!")
-        print(
-            f"To change how many failed cases to print change {cyan}NUM_FAILED{reset}"
-            " in configuration section.\n"
-        )
-    print(f"\rPassed: {green if passed == i + 1 else red}{passed}/{i + 1}{reset} tests")
-    print(f"Finished in: {yellow}{sum(times):.4f}{reset} seconds")
+    
+    print_summary(i + 1, passed, sum(times))
 
 
 def speed_test_solution_obo(
@@ -522,13 +536,15 @@ def speed_test_solution_obo(
         )
     print()
 
-    times, timedout = [], False
+    timedout = False
+    times: List[float] = []
     for i in range(loops):
+        loop_times = []
         for j in range(speed_num_cases):
             test = ["1"] + test_inp[j] if ADD_1_IN_OBO else test_inp[j]
 
             t, passed = test_for_speed_obo(test, test_out[j])
-            times.append(t)
+            loop_times.append(t)
 
             if not passed:
                 print(f"\r{red}Failed at iteration {i + 1}!{reset}")
@@ -539,14 +555,11 @@ def speed_test_solution_obo(
                 break
         if timedout:
             break
+        times.append(sum(loop_times))
         if 1 < loops <= 10 or not i % (loops * PROGRESS_PERCENT):
             print(f"\rProgress: {yellow}{i:>{len(str(loops))}}/{loops}{reset}", end="")
     else:
-        print(
-            f"\rTest for speed passed! It took your solution {yellow}{sum(times):.4f}{reset} "
-            f"seconds to complete {cyan}{loops:_}{reset} times!"
-        )
-        print(f"Average time: {yellow}{sum(times)/loops:.4f}{reset} seconds")
+        print_speed_summary(speed_num_cases, loops, times)
 
 
 def debug_solution(
@@ -560,17 +573,22 @@ def debug_solution(
     def test_debug(input: Callable) -> None:
         solution()
 
-    command = OTHER_LANG_COMMAND if OTHER_LANG_COMMAND else "Python solution"
+    command = OTHER_LANG_COMMAND
+    
+    if lang is Lang.PYTHON:
+        running = f"{emojis.snake} {yellow}Python solution{reset}"
+    else:
+        running = f"{emojis.otter} {yellow}{command[command.rfind('/') + 1:]}{reset}"
 
     print('Started testing, format "Debug":')
-    print(f"Running: {yellow}{command}{reset}")
+    print(f"Running: {running}")
     print(f" Test nr: {cyan}{case_number}{reset}")
 
     print(f"      Input: {cyan}")
     pprint(test_inp[case_number - 1])
     print(f"{reset}   Expected: {green}{test_out[case_number - 1]}{reset}")
     print("Your output:")
-    if OTHER_LANG_COMMAND:
+    if command:
         test_ = "1\n" + "\n".join(test_inp[case_number - 1])
         proc = subprocess.run(
             command.split(),
@@ -614,23 +632,11 @@ def test_other_lang(
         print(err)
         exit(1)
 
-    passed = i = oi = 0
-    for i, (inp, exp) in enumerate(
-        zip_longest(test_inp[:num_cases], test_out[:num_cases]), 1
-    ):
-        out_len = len(exp.split("\n"))
-        out = "\n".join(output[oi : oi + out_len])
-        oi += out_len
-        if out != exp:
-            if i - passed <= NUM_FAILED or NUM_FAILED == -1:
-                print(f"Test nr:{i}\n      Input: {cyan}")
-                pprint(inp)
-                print(f"{reset}Your output: |{red}{out}{reset}|")
-                print(f"   Expected: |{green}{exp}{reset}|\n")
-        else:
-            passed += 1
-    
-    print_summary(i, passed, end, start)    
+    passed, i = check_result(test_inp, test_out, num_cases, output)
+
+    print_summary(i, passed, end - start)    
+
+########################################################################
 
 
 def main(path: str) -> None:
@@ -684,7 +690,7 @@ if __name__ == "__main__":
 
     if USE_EMOJI:
         emojis = Emoji(
-            stopwatch="\N{stopwatch} ",
+            stopwatch="\N{stopwatch}  ",
             hundred="\N{Hundred Points Symbol}",
             poo=" \N{Pile of Poo}",
             snake="\N{snake}",
@@ -695,6 +701,9 @@ if __name__ == "__main__":
             rocket="\N{rocket} ",
             warning=" \N{warning sign} ",
             bang="\N{Heavy Exclamation Mark Symbol}",
+            stop="\N{Octagonal sign}",
+            snail="\N{snail} ",
+            leopard=" \N{leopard}",
         )
     else:
         emojis = Emoji()
