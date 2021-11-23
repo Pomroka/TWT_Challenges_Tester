@@ -696,6 +696,8 @@ if __name__ == "__main__":
             warning=" \N{warning sign} ",
             bang="\N{Heavy Exclamation Mark Symbol}",
         )
+    else:
+        emojis = Emoji()
 
     path = os.path.dirname(os.path.abspath(__file__))
     os.chdir(path)
