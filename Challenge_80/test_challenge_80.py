@@ -116,7 +116,7 @@ SPEED_TEST = False
 NUMBER_SPEED_TEST_CASES = -1
 
 # How many times run tests
-NUMER_OF_LOOPS = -1
+NUMER_OF_LOOPS = 5
 
 # Timeout in seconds. Will not timeout in middle of test case (if TEST_ONE_BY_ONE is False
 # will not timeout in middle of loop). Will timeout only between test cases / loops
