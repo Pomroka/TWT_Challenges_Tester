@@ -312,7 +312,7 @@ def print_begin(
     if lang is Lang.PYTHON:
         running = f"{emojis.snake} {yellow}Python solution{reset}"
     else:
-        running = f"{emojis.otter}: {yellow}{command[command.rfind('/') + 1:]}{reset}"
+        running = f"{emojis.otter}{yellow}{command[command.rfind('/') + 1:]}{reset}"
         
     print(f"{emojis.rocket}Started testing, format {format}:")
     print(f"Running: {running}")
