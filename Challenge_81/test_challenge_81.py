@@ -135,7 +135,7 @@ PROGRESS_PERCENT = 0.1
 
 # How many failed cases to print
 # Set to -1 to print all failed cases
-NUM_FAILED = 1
+NUM_FAILED = 5
 
 # Set to False if you want to share result but don't want to share solution length
 PRINT_SOLUTION_LENGTH = True
@@ -312,10 +312,10 @@ def print_begin(
     if lang is Lang.PYTHON:
         running = f"{emojis.snake} {yellow}Python solution{reset}"
     else:
-        running = f"{emojis.otter}{yellow}{command[command.rfind('/') + 1:]}{reset}"
+        running = f"{emojis.otter} {yellow}{command[command.rfind('/') + 1:]}{reset}"
         
     print(f"{emojis.rocket}Started testing, format {format}:")
-    print(f"Running: {running}")
+    print(f"Running:{running}")
     print(f" - Number of cases{emojis.filebox}: {cyan}{num_cases}{reset}")
     if PRINT_EXTRA_STATS:
         print_extra_stats(test_inp[:num_cases], test_out[:num_cases], num_cases)
