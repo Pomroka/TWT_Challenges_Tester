@@ -76,7 +76,9 @@ SEP_INP_OUT_TESTCASE_FILE = False
 # Name of file with inputs test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
 # If test cases file is compressed, you don't need to extract it, just give name of
 # compressed file (with .gz extension)
-TEST_CASE_FILE = "test_cases.json"
+TEST_CASE_FILE = "test_cases.json"          # max number len 10 number of cases 100
+#TEST_CASE_FILE = "test_cases_small.json"   # max number len 100 number of cases 100
+#TEST_CASE_FILE = "test_cases_big.json"     # max number len 1000 number of cases 100
 
 # Name of file with outputs for test cases (ignored if SEP_INP_OUT_TESTCASE_FILE is False)
 TEST_CASE_FILE_OUT = ""
