@@ -17,6 +17,21 @@ file in same folder or there's nothing important in it cos it will be **overwrit
 
 Change `SOLUTION_FILE_NAME` to your file name in `CONFIGURATION` section.
 
+### To test solution in languages other then Python
+Change `OTHER_LANG_COMMAND` to command to run your solution for not compiled languages or to already compiled executable for compiled languages.
+
+### Examples:
+```py
+OTHER_LANG_COMMAND = "Cpp/c80_cpp.exe"  # relative to tester file path to compiled windows executable
+OTHER_LANG_COMMAND = "/home/user/Dev/Challenge80/c80_c"  # absolute path to compiled linux executable
+OTHER_LANG_COMMAND = "c80_rust.exe"  # name of compiled file in same folder as tester
+OTHER_LANG_COMMAND = "java -cp Java/ c80_java.Main"  # command to run solution in non compiled language
+OTHER_LANG_COMMAND = ""  # leave empty if you want to test python solution
+```
+
+If you want to see your solution length in other languages then Python change `SOLUTION_FILE_NAME` to your solution source code file name.
+
+
 If this tester wasn't prepared by me for the challenge you want to test,
 you may need to adjust other configuration settings. Read the comments on each.
 
