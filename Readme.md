@@ -1,3 +1,5 @@
+![TWT Logo](logo1.png "TWT Logo")
+
 # Testers for TechWithTim Discord weekly challenges
 
 You will find here my testers for weekly challenges.
