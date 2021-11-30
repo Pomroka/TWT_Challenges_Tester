@@ -31,7 +31,7 @@ If char start with `space` use closest position to first non space char.
 
 ### Input:
 ```
-1
+3
 asdZ 12349
 2
 z  m
