@@ -19,10 +19,10 @@ file in same folder or there's nothing important in it cos it will be **overwrit
 
 You can configure tester editing tester fila and changing `CONFIGURATION` section or using command line arguments.
 
-Run with flag `-h` or `--help` for more information how to use command line arguments.: 
+Run with flag `-h` or `--help` for more information how to use command line arguments. 
 
 ```
-python test_challenge_XX.py --help
+$ python test_challenge_XX.py --help
 ```
 
 Change `SOLUTION_SRC_FILE_NAME` to your file name in `CONFIGURATION` section or use `-s solution_file.py`.
@@ -80,7 +80,7 @@ Download tester file `test_challenge_XX.py` and file with test cases `test_cases
 
 Import your solution in line `92`, and run tester file
 ```
->python test_challenge_XX.py
+> python test_challenge_XX.py
 ```
 If you see some weird chars instead of colors in output or don't want colors
 switch `COLOR_OUT` to `False` in line `30`
