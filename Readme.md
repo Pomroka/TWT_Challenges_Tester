@@ -17,10 +17,18 @@ Make sure Python has right to save to this folder.
 This tester will create one file `temp_solution_file.py` make sure there's no such
 file in same folder or there's nothing important in it cos it will be **overwritten!**
 
-Change `SOLUTION_FILE_NAME` to your file name in `CONFIGURATION` section.
+You can configure tester editing tester fila and changing `CONFIGURATION` section or using command line arguments.
+
+Run with flag `-h` or `--help` for more information: 
+
+```
+python test_challenge_XX.py --help
+```
+
+Change `SOLUTION_SRC_FILE_NAME` to your file name in `CONFIGURATION` section or use `-s solution_file.py`.
 
 ### To test solution in languages other then Python
-Change `OTHER_LANG_COMMAND` to command to run your solution for not compiled languages or to already compiled executable for compiled languages.
+Use `-c command` or change `OTHER_LANG_COMMAND` to command to run your solution for not compiled languages or to already compiled executable for compiled languages. For multiword `command` command line argument surround it in quotes `"multi word command"`
 
 ### Examples:
 ```py
@@ -29,6 +37,12 @@ OTHER_LANG_COMMAND = "/home/user/Dev/Challenge80/c80_c"  # absolute path to comp
 OTHER_LANG_COMMAND = "c80_rust.exe"  # name of compiled file in same folder as tester
 OTHER_LANG_COMMAND = "java -cp Java/ c80_java.Main"  # command to run solution in non compiled language
 OTHER_LANG_COMMAND = ""  # leave empty if you want to test python solution
+```
+
+```
+> test_challenge_XX.py -c "java -cp Java/ c80_java.Main"
+
+$ test_challenge_XX.py -c Rust/c80_rust/target/release/c80_rust
 ```
 
 If you want to see your solution length in other languages then Python change `SOLUTION_FILE_NAME` to your solution source code file name.
