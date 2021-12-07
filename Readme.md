@@ -19,7 +19,7 @@ file in same folder or there's nothing important in it cos it will be **overwrit
 
 You can configure tester editing tester fila and changing `CONFIGURATION` section or using command line arguments.
 
-Run with flag `-h` or `--help` for more information: 
+Run with flag `-h` or `--help` for more information how to use command line arguments.: 
 
 ```
 python test_challenge_XX.py --help
