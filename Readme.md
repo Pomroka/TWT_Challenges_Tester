@@ -72,6 +72,16 @@ If you want use own test_cases, they must be in json format.
 ```
 All values must be strings! Cast all ints, floats, etc. to str before dumping json!
 
+## **Supported Python version**
+
+- **Python 3.8+** works without modification
+- **Python 3.7** you need to comment out line `otter="\N{otter}",`
+- **Python 3.6** you need to comment out lines:
+  * `from dataclasses import dataclass`
+  * both lines that have `@dataclass`
+  * comment out whole block starting with line `if Config.USE_EMOJI:` up to and including `else:` and unindent next line
+- older Python version not supported
+
 ----------
 
 ## Old tester (Challenge 72 and older)

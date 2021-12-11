@@ -905,22 +905,6 @@ if __name__ == "__main__":
         print("Make sure it is in the same directory as this script!")
         exit(1)
 
-    # if SEP_INP_OUT_TESTCASE_FILE and not TEST_CASE_FILE_EXP:
-    #     print("Wrong configuration!\n")
-    #     print(
-    #         f"{cyan}SEP_INP_OUT_TESTCASE_FILE{reset} is set to {yellow}True{reset} "
-    #         f"but {cyan}TEST_CASE_FILE_EXP{reset} is empty!\n"
-    #     )
-    #     print(
-    #         "If outputs for test cases are in the same file as inputs "
-    #         f"set {cyan}SEP_INP_OUT_TESTCASE_FILE{reset} to {yellow}False{reset}."
-    #     )
-    #     print(
-    #         "If input and output are in separated files enter file name in "
-    #         f"{cyan}TEST_CASE_FILE_EXP{reset} in configure section"
-    #     )
-    #     exit(1)
-
     test_out_file = (
         os.path.join(path, Config.TEST_CASE_FILE_EXP)
         if Config.TEST_CASE_FILE_EXP
