@@ -33,3 +33,5 @@ You are given an integer `n` and `n` testcases follow.
 To be submitted through DM -> `@KK1729`.
 
 `Python`, `Golang`, `C++`, `JS` solutions are accepted
+
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/K_Challenge_4)

@@ -29,3 +29,5 @@ Next `T` lines: each lines contains an int. After reversing bits (base `2`) in t
 
 ### Note:
 - file `test_cases_ch_54_2n.py` includes negative numbers
+
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_54_2)

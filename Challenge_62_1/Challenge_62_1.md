@@ -53,3 +53,5 @@ b
 
 - `s` will only contain lowercase letters and digits `2` through `9` and it will always start with a letter.
 - It's guaranteed that `k` is less than or equal to the length of the decoded string.
+
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_62_1)

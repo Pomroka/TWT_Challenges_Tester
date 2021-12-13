@@ -42,3 +42,5 @@ Code can be written in either of these languages:
 - `C++ - G++ 10.3` - should work with my tester 
 - `Ruby 3.0`       - should work with my tester
 - `Golang 1.16`    - should work with my tester
+
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_80)

@@ -47,3 +47,5 @@ From the block fourth (index `3`) biggest distance is `1` to any facilities that
 - `1` stands for `True` and `0` stands for `False`
 - There can be any amenities not just gym, school, store
 - There won't be two answers
+
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/K_Challenge_3_1)

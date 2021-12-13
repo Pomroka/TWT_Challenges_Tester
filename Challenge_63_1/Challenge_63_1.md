@@ -44,3 +44,5 @@ Tomas, Smith
 - `eval`, `exec` and `open` functions are not allowed same goes for `import`
 
 **Note:** `?` means it can be anything
+
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_63_1)

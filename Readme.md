@@ -125,7 +125,11 @@ If you see `None` in `"Input"` or `"Your output"` don't check failed cases until
 
 ------
 
-## To download individual file from GitHub
+## To download tester for individual challenge/file from GitHub
+
+You can switch branch to branch with that challenge, then click `Code` and `Download ZIP`
+
+Or from command line:
 
 ```sh
 # Linux
@@ -135,4 +139,4 @@ $ wget https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Ch
 > curl -o test_cases.json https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_76/test_cases.json
 ```
 
-To download folder use https://downgit.github.io/#/home
+Or use https://downgit.github.io/#/home (ready to use link in Challenge_XX.md)

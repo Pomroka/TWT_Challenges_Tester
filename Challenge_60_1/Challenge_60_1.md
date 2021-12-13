@@ -52,3 +52,5 @@ You have to print the card avob chose.
 - you have to submit in a file
 - code must be written in python
 - `eval` and `exec` functions are not allowed same goes for `import` and `open`
+
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_60_1)
