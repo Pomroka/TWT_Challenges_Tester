@@ -17,7 +17,7 @@ Make sure Python has right to save to this folder.
 This tester will create one file `temp_solution_file.py` make sure there's no such
 file in same folder or there's nothing important in it cos it will be **overwritten!**
 
-You can configure tester editing tester fila and changing `CONFIGURATION` section or using command line arguments.
+You can configure tester editing tester file and changing `CONFIGURATION` section or using command line arguments.
 
 Run with flag `-h` or `--help` for more information how to use command line arguments. 
 
@@ -28,9 +28,11 @@ $ python test_challenge_XX.py --help
 Change `SOLUTION_SRC_FILE_NAME` to your file name in `CONFIGURATION` section or use `-s solution_file.py`.
 
 ### To test solution in languages other then Python
+
 Use `-c command` or change `OTHER_LANG_COMMAND` to command to run your solution for not compiled languages or to already compiled executable for compiled languages. For multiword `command` command line argument surround it in quotes `"multi word command"`
 
 ### Examples:
+
 ```py
 OTHER_LANG_COMMAND = "Cpp/c80_cpp.exe"  # relative to tester file path to compiled windows executable
 OTHER_LANG_COMMAND = "/home/user/Dev/Challenge80/c80_c"  # absolute path to compiled linux executable
@@ -54,6 +56,7 @@ you may need to adjust other configuration settings. Read the comments on each.
 ### Custom test cases
 
 If you want use own test_cases, they must be in json format.
+
 ```py
 [
   [ # this list can be in separated file for inputs only 
@@ -70,6 +73,7 @@ If you want use own test_cases, they must be in json format.
   ]
 ]
 ```
+
 All values must be strings! Cast all ints, floats, etc. to str before dumping json!
 
 ## **Supported Python version**
@@ -122,9 +126,10 @@ If you see `None` in `"Input"` or `"Your output"` don't check failed cases until
 ------
 
 ## To download individual file from GitHub
+
 ```sh
 # Linux
-> wget https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_76/test_cases.json
+$ wget https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_76/test_cases.json
 
 # Windows 10
 > curl -o test_cases.json https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_76/test_cases.json
