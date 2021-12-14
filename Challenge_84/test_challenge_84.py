@@ -335,6 +335,7 @@ def print_begin(
         and (
             lang is Lang.OTHER
             and not Config.SOLUTION_SRC_FILE_NAME.endswith(".py")
+            or Config.OTHER_LANG_COMMAND.endswith(".py")
             or lang is Lang.PYTHON
         )
     ):
