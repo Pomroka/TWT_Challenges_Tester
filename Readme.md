@@ -129,6 +129,8 @@ If you see `None` in `"Input"` or `"Your output"` don't check failed cases until
 
 You can switch branch to branch with that challenge, then click `Code` and `Download ZIP`
 
+Or in **Releases** section click `Challene XX` and download `soure_code (...)`.
+
 Or from command line:
 
 ```sh
