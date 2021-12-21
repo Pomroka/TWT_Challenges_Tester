@@ -299,11 +299,11 @@ def print_extra_stats(
 ) -> None:
     print(
         f" - Average number of days: {yellow}"
-        f"{sum(int(x[0]) for x in test_inp) // num_cases:_}{reset}"
+        f"{sum(int(x[0].split()[0]) for x in test_inp) // num_cases:_}{reset}"
     )
     print(
         f" - Max number of days: {yellow}"
-        f"{max(int(x[0]) for x in test_inp):_}{reset}"
+        f"{max(int(x[0].split()[0]) for x in test_inp):_}{reset}"
     )
     print(
         f" - Average number of energy shortage days: {yellow}"
