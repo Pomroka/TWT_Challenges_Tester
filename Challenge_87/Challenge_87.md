@@ -39,9 +39,9 @@ Output positive integer `B` in which `K` can be written as one or more `1s` in b
 
 ### Explanation
 
-- `3 = 11` in base `2` so choose **<u>2</u>**.
-- `13 = 111` in base `3`, `11` in base `12`. Choose **<u>3</u>**.
-- `341 = 11111` in base **<u>4</u>**.
+- `3 = 11` in base `2` so choose **<ins>2</ins>**.
+- `13 = 111` in base `3`, `11` in base `12`. Choose **<ins>3</ins>**.
+- `341 = 11111` in base **<ins>4</ins>**.
 
 ## Constraints
 
