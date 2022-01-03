@@ -60,4 +60,4 @@ Code can be written in either of these languages:
 - `Java` 18
 - `Rust` 1.52
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/master/Challenge_87)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_87)
