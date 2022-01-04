@@ -300,6 +300,7 @@ def print_extra_stats(
 ) -> None:
     """ You can print here some extra info about test cases.
         For example maximum/minimum/average length of list or number value.
+        Set PRINT_EXTRA_STATS to True if you add them. 
     """
     print(
         f" - Min ...: {yellow}"
