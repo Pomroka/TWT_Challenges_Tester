@@ -78,8 +78,11 @@ class Config:
     # Name of file with inputs test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
     # If test cases file is compressed, you don't need to extract it, just give name of
     # compressed file (with .gz extension)
-    TEST_CASE_FILE = "test_cases_6.json"        # K up to 10^6
-    # TEST_CASE_FILE = "test_cases_14.json"       # K up to 10^14
+    TEST_CASE_FILE = "test_cases_6.json"      # K up to 10^6
+    # TEST_CASE_FILE = "test_cases_14.json"   # K up to 10^14
+    # TEST_CASE_FILE = "test_cases_514.json"  # 5000 test cases K up to 10^14
+    # TEST_CASE_FILE = "test_cases_64.json"   # K up to 2^64 - 1 if you want check your solution
+                                              # there wont be such big cases in official tester
 
     # If test cases input and expected output are in separate files, name of file
     # with expected outputs for test cases. Empty string - if they in one file.
