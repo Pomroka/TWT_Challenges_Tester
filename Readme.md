@@ -136,6 +136,8 @@ Use empty input: `input()`
 
   - If you see `None` in `"Input"` or `"Your output"` don't check failed cases until you fix problem with printing, cos "Input" and "Your output" are misaligned after first missing/extra print
 
+- `"Your Output"` looks like `"Expected"` but tester show its wrong. Check if you print trailing spaces.
+
 - `StopIteration`: Your solution try to get more input then there is test cases
 
   - If you use `open(0)` instead of `input` you get `StopIteration` error in my tester or tester will hang waiting for EOF char not presented in input data
