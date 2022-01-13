@@ -54,9 +54,9 @@ OTHER_LANG_COMMAND = ""  # leave empty if you want to test python solution
 ```
 
 ```sh
-> test_challenge_XX.py -c "java -cp Java/ c80_java.Main"
+> python test_challenge_XX.py -c "java -cp Java/ c80_java.Main"
 
-$ test_challenge_XX.py -c Rust/c80_rust/target/release/c80_rust
+$ python test_challenge_XX.py -c Rust/c80_rust/target/release/c80_rust
 ```
 
 If you want to see your solution length in other languages then Python change `SOLUTION_FILE_NAME` to your solution source code file name.
@@ -141,7 +141,14 @@ Use empty input: `input()`
 - `StopIteration`: Your solution try to get more input then there is test cases
 
   - If you use `open(0)` instead of `input` you get `StopIteration` error in my tester or tester will hang waiting for EOF char not presented in input data
-    - to avoid this use `OTHER_LANG_COMMAND = "python to_submit_ch_83.py"`
+  - to avoid this use one of:
+    - set `OTHER_LANG_COMMAND = "python to_submit_ch_83.py"`
+    - run `python test_challenge_XX.py -c "python to_submit_ch_83.py"`
+- If you call your functions inside `if __name__ == '__main__':` your functions wont be called by default cos your solution is imported.
+  - to avoid this use one of:
+    - set `OTHER_LANG_COMMAND = "python to_submit_ch_83.py"`
+    - run `python test_challenge_XX.py -c "python to_submit_ch_83.py"`
+    - or don't use `if __name__ == '__main__':`
 
 ----------
 
