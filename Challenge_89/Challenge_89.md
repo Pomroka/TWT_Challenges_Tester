@@ -27,6 +27,7 @@ You are given a number `T` and `T` testcases follow, for each testcase you are g
 
 ### Explanation
 
+![Explanation](2022-01-17-19-39-34.png)
 The maximal rectangle is shown in the above picture.
 
 Challenge suggested by <@791545147836858389>
