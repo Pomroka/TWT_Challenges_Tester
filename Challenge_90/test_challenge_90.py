@@ -82,7 +82,9 @@ class Config:
     # Name of file with inputs test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
     # If test cases file is compressed, you don't need to extract it, just give name of
     # compressed file (with .gz extension)
-    TEST_CASE_FILE = "test_cases.json"
+    TEST_CASE_FILE = "test_cases.json"          # 10k test cases with sum <= 2**64-1
+    # TEST_CASE_FILE = "test_cases_b.json"      # 1000 test cases with max length of the sum 2049
+    # TEST_CASE_FILE = "test_cases_b.json.gz"   # 1000 test cases with max length of the sum 16332
 
     # If test cases input and expected output are in separate files, name of file
     # with expected outputs for test cases. Empty string - if they in one file.
@@ -302,12 +304,12 @@ def print_extra_stats(
     test_inp: List[List[str]], test_out: List[str], num_cases: int
 ) -> None:
     print(
-        f" - Max sum : {yellow}"
-        f"{max(int(x, 2) for x in test_out):_}{reset}"
+        f" - Sum max length: {yellow}"
+        f"{max(len(x) for x in test_out):_}{reset}"
     )
     print(
-        f" - Average sum: {yellow}"
-        f"{sum(int(x, 2) for x in test_out) // num_cases:_}{reset}"
+        f" - Sum average length: {yellow}"
+        f"{sum(len(x) for x in test_out) // num_cases:_}{reset}"
     )
 
 
