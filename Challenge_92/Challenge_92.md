@@ -45,6 +45,8 @@ Assume there is no EOF characters or any other characters besides `*` and `\n`.
 0
 ```
 
+### Explanation
+
 For case `1`, refer to the triangle above. There are `10 *s` and `4 newlines`, of a total of `14` bytes.
 For case `2`, the actual result would be `5150`, but since it is greater than `4096`, we modulo it by `4096`, getting `5150 ≅ 1054 (mod 4096)`.
 
