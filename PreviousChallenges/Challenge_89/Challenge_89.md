@@ -43,4 +43,4 @@ Code can be written in any of these languages:
 - `Java` 18
 - `Rust` 1.58
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_89)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_89)

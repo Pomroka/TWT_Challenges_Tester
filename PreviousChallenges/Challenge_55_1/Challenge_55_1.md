@@ -34,4 +34,4 @@ You are given a number `T` the number of tests cases. `T` lines follow each line
 
 **NOTE:** `0 <= n < 17m` and `0 <= m < 17m`
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_55_1)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_55_1)

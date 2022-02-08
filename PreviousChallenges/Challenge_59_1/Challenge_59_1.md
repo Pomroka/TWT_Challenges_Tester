@@ -55,4 +55,4 @@ UK DZ 200
 
 Test cases by @not everyone @here (Rick Dornodon#3962)
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_59_1)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_59_1)

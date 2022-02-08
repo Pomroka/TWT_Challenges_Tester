@@ -36,4 +36,4 @@ Code can be written in either of these languages:
 - `C++ - G++ 10.3` - Should work with my tester same other compiled languages
 - Other languages not officially supported - May or may not work in my tester
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_78)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_78)

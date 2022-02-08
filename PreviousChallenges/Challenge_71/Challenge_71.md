@@ -46,4 +46,4 @@ Challenge suggested by infernus
 - code must be written in python
 - `eval`, `exec` and `open` functions are not allowed same goes for `import`
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_71)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_71)

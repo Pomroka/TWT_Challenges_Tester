@@ -44,4 +44,4 @@ Challenge suggested by @Oniriik
 - `X` can be placed before `L` (`50`) and `C` (`100`) to make `40` and `90`.
 - `C` can be placed before `D` (`500`) and `M` (`1000`) to make `400` and `900`.
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_75)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_75)
