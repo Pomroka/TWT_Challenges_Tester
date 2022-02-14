@@ -150,15 +150,22 @@ class Config:
 
 ########################################################################
 
+import argparse
+import functools
+import gzip
+import json
+import operator
+import os
+import platform
+import subprocess
+import sys
 from enum import Enum, auto
+from io import StringIO
 from itertools import zip_longest
-import subprocess, argparse
-import sys, os, platform, json, functools, operator, gzip
+from pprint import pprint
 from time import perf_counter
 from typing import Callable, List, Tuple
 from unittest import mock
-from io import StringIO
-from pprint import pprint
 
 
 def enable_win_term_mode() -> bool:
@@ -166,7 +173,7 @@ def enable_win_term_mode() -> bool:
     if win == False:
         return True
 
-    from ctypes import windll, c_int, byref, c_void_p
+    from ctypes import byref, c_int, c_void_p, windll
 
     ENABLE_VIRTUAL_TERMINAL_PROCESSING = 0x0004
     INVALID_HANDLE_VALUE = c_void_p(-1).value
@@ -329,7 +336,7 @@ def print_begin(
 
     print(f"{emojis.rocket}Started testing, format {format}:")
     print(f"Running:{running}")
-    print(f" - Number of cases{emojis.filebox}: {cyan}{num_cases}{reset}")
+    print(f" - Number of cases{emojis.filebox}: {cyan}{num_cases:_}{reset}")
     if timeout:
         print(f" - Timeout: {red}{Config.TIMEOUT}{reset} seconds{emojis.stop}")
     if Config.PRINT_EXTRA_STATS:
@@ -400,7 +407,7 @@ def check_result(
             if i - passed <= Config.NUM_FAILED or Config.NUM_FAILED == -1:
                 print(f"Test nr:{i}\n      Input: {cyan}")
                 pprint(inp)
-                print(f"{reset}Your output: {red}{out}{reset}")
+                print(f"{reset}Your output: {red}{out if out else None}{reset}")
                 print(f"   Expected: {green}{exp}{reset}\n")
         else:
             passed += 1
@@ -612,7 +619,7 @@ def debug_solution(
             input=test_,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            universal_newlines=False,
+            universal_newlines=True,
         )
         print(proc.stderr)
         print(proc.stdout)
@@ -637,7 +644,7 @@ def test_other_lang(
         input=test_inp_,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
-        universal_newlines=False,
+        universal_newlines=True,
     )
     end = perf_counter()
 
@@ -652,6 +659,63 @@ def test_other_lang(
     passed, i = check_result(test_inp, test_out, num_cases, output)
 
     print_summary(i, passed, end - start)
+
+
+def speed_test_other_aio(
+    command: str, test_inp: List[List[str]], test_out: List[str], speed_num_cases: int
+) -> None:
+    test_inp_ = (
+        f"{speed_num_cases}\n"
+        + "\n".join(functools.reduce(operator.iconcat, test_inp[:speed_num_cases], []))
+        + "\n"
+    )
+    
+    def run() -> tuple[bool, float]:
+        start = perf_counter()
+        proc = subprocess.run(
+            command.split(),
+            input=test_inp_,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            universal_newlines=True,
+        )
+        end = perf_counter()
+        
+        err = proc.stderr
+        output = proc.stdout.split("\n")
+        output = [x.strip("\r") for x in output]
+        if err:
+            print(err)
+            raise SystemExit(1)
+
+        return "\n".join(output).strip() == "\n".join(test_out[:speed_num_cases]), end - start
+    
+    loops = max(1, Config.NUMER_OF_LOOPS)
+    print("\nSpeed test started.")
+    print(f"Running: {emojis.otter} {yellow}{command[command.rfind('/') + 1:]}{reset}")
+    print(f'Testing {cyan}{speed_num_cases}{reset} cases, format "All in one":')
+    print(f" - Number of loops: {cyan}{loops:_}{reset}")
+    print(f" - Timeout: {red}{Config.TIMEOUT}{reset} seconds")
+    if Config.PRINT_EXTRA_STATS:
+        print_extra_stats(
+            test_inp[:speed_num_cases], test_out[:speed_num_cases], speed_num_cases
+        )
+    print()
+
+    times = []
+    for i in range(loops):
+        passed, time = run()
+        times.append(time)
+        if not passed:
+            print(f"{red}Failed at iteration {i + 1}!{reset}")
+            break
+        if sum(times) >= Config.TIMEOUT:
+            print(f"{red}Timeout at {i + 1} iteration!{reset}")
+            break
+        if 1 < loops <= 10 or not i % (loops * Config.PROGRESS_PERCENT):
+            print(f"\rProgress: {yellow}{i:>{len(str(loops))}}/{loops}{reset}", end="")
+    else:
+        print_speed_summary(speed_num_cases, loops, times)
 
 
 ########################################################################
@@ -848,12 +912,12 @@ def main(path: str) -> None:
     if Config.OTHER_LANG_COMMAND:
         os.chdir(path)
         test_other_lang(Config.OTHER_LANG_COMMAND, test_inp, test_out, num_cases)
+        if Config.SPEED_TEST:
+            speed_test_other_aio(Config.OTHER_LANG_COMMAND, test_inp, test_out, speed_num_cases)
         raise SystemExit(0)
 
     if Config.TEST_ONE_BY_ONE:
         test_solution_obo(test_inp, test_out, num_cases)
-        if Config.SPEED_TEST:
-            speed_test_solution_obo(test_inp, test_out, speed_num_cases)
     else:
         test_solution_aio(test_inp, test_out, num_cases)
         if Config.SPEED_TEST:
