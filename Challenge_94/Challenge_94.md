@@ -7,9 +7,9 @@ The teacher gave you a deck of cards, to test your knowledge about prime numbers
 
 You are given a number `T` and `T` testcases follow, for each testcase you are given a string of digits (terminated by a newline), rearrange it to make the largest prime number possible.
 
-## Examples
+### Examples
 
-### Input
+#### Input
 
 ```rs
 3
@@ -18,7 +18,7 @@ You are given a number `T` and `T` testcases follow, for each testcase you are g
 9778898
 ```
 
-### Output
+#### Output
 
 ```rs
 7817
@@ -29,6 +29,10 @@ You are given a number `T` and `T` testcases follow, for each testcase you are g
 #### Note
 
 The number cannot begin with a `0`.
+
+#### Constraints
+
+`1 <= Length of each number <= 7`
 
 Challenge suggested by @KK1729
 
