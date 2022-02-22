@@ -22,7 +22,7 @@ You are given a number `T` and `T` testcases follow, for each testcase you are g
 
 ```rs
 7817
-8011
+8101
 9788879
 ```
 
