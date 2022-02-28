@@ -71,4 +71,4 @@ Code can be written in any of these languages:
 - `Rust` 1.58
 - `C#` 10 (.Net 6.0)
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_92)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_92)
