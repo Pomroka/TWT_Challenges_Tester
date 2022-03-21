@@ -1,6 +1,10 @@
 # Testers for TechWithTim Discord weekly challenges
 
+<<<<<<< HEAD
 [![latest](https://img.shields.io/badge/latest-Challenge--97-orange)](https://github.com/Pomroka/TWT_Challenges_Tester/releases/latest) [![Python version](https://img.shields.io/badge/python-3.6*%20%7C%203.7*%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue)](#supported-python-version) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+=======
+[![latest](https://img.shields.io/badge/latest-Challenge--98-orange)](https://github.com/Pomroka/TWT_Challenges_Tester/releases/latest) [![Python version](https://img.shields.io/badge/python-3.6*%20%7C%203.7*%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue)](#supported-python-version) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+>>>>>>> c98
 
 ![TWT Logo](logo1.png "TWT Logo")
 
@@ -36,7 +40,11 @@ You can configure tester editing tester file and changing `CONFIGURATION` sectio
 Run with flag `-h` or `--help` for more information how to use command line arguments.
 
 ```sh
+<<<<<<< HEAD
 python test_challenge_XX.py --help
+=======
+python test_challenge_98.py --help
+>>>>>>> c98
 ```
 
 Change `SOLUTION_SRC_FILE_NAME` to your file name in `CONFIGURATION` section or use `-s solution_file.py`.
@@ -48,17 +56,30 @@ Use `-c command` or change `OTHER_LANG_COMMAND` to command to run your solution 
 ### Examples
 
 ```py
+<<<<<<< HEAD
 OTHER_LANG_COMMAND = "Cpp/c80_cpp.exe"  # relative to tester file path to compiled windows executable
 OTHER_LANG_COMMAND = "/home/user/Dev/Challenge80/c80_c"  # absolute path to compiled linux executable
 OTHER_LANG_COMMAND = "c80_rust.exe"  # name of compiled file in same folder as tester
 OTHER_LANG_COMMAND = "java -cp Java/ c80_java.Main"  # command to run solution in non compiled language
+=======
+OTHER_LANG_COMMAND = "Cpp/c98_cpp.exe"  # relative to tester file path to compiled windows executable
+OTHER_LANG_COMMAND = "/home/user/Dev/Challenge98/c98_c"  # absolute path to compiled Linux executable
+OTHER_LANG_COMMAND = "c98_rust.exe"  # name of compiled file in same folder as tester
+OTHER_LANG_COMMAND = "java -cp Java/ c98_java.Main"  # command to run solution in non compiled language
+>>>>>>> c98
 OTHER_LANG_COMMAND = ""  # leave empty if you want to test python solution
 ```
 
 ```sh
+<<<<<<< HEAD
 > python test_challenge_XX.py -c "java -cp Java/ c80_java.Main"
 
 $ python test_challenge_XX.py -c Rust/c80_rust/target/release/c80_rust
+=======
+> python test_challenge_98.py -c "java -cp Java/ c98_java.Main"
+
+$ python test_challenge_98.py -c Rust/c98_rust/target/release/c98_rust
+>>>>>>> c98
 ```
 
 If you want to see your solution length in other languages then Python change `SOLUTION_FILE_NAME` to your solution source code file name.
@@ -144,12 +165,21 @@ Use empty input: `input()`
 
   - If you use `open(0)` instead of `input` you get `StopIteration` error in my tester or tester will hang waiting for EOF char not presented in input data
   - to avoid this use one of:
+<<<<<<< HEAD
     - set `OTHER_LANG_COMMAND = "python to_submit_ch_83.py"`
     - run `python test_challenge_XX.py -c "python to_submit_ch_83.py"`
 - If you call your functions inside `if __name__ == '__main__':` your functions wont be called by default cos your solution is imported.
   - to avoid this use one of:
     - set `OTHER_LANG_COMMAND = "python to_submit_ch_83.py"`
     - run `python test_challenge_XX.py -c "python to_submit_ch_83.py"`
+=======
+    - set `OTHER_LANG_COMMAND = "python to_submit_ch_98.py"`
+    - run `python test_challenge_98.py -c "python to_submit_ch_98.py"`
+- If you call your functions inside `if __name__ == '__main__':` your functions wont be called by default cos your solution is imported.
+  - to avoid this use one of:
+    - set `OTHER_LANG_COMMAND = "python to_submit_ch_98.py"`
+    - run `python test_challenge_98.py -c "python to_submit_ch_98.py"`
+>>>>>>> c98
     - or don't use `if __name__ == '__main__':`
 
 ----------
@@ -158,16 +188,27 @@ Use empty input: `input()`
 
 You can switch branch to branch with that challenge, then click `Code` and `Download ZIP`
 
+<<<<<<< HEAD
 Or in **Releases** section click `Challene XX` and download `soure_code (...)`.
+=======
+Or in **Releases** section click `Challenge XX` and download `source_code (...)`.
+>>>>>>> c98
 
 Or from command line:
 
 ```sh
 # Linux
+<<<<<<< HEAD
 $ wget https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_76/test_cases.json
 
 # Windows 10
 > curl -o test_cases.json https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_76/test_cases.json
+=======
+$ wget https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_98/test_cases.json
+
+# Windows 10
+> curl -o test_cases.json https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_98/test_cases.json
+>>>>>>> c98
 ```
 
 Or use [https://downgit.github.io/#/home](https://downgit.github.io/#/home) (ready to use link in Challenge_XX.md)
