@@ -675,7 +675,7 @@ def speed_test_other_aio(
         + "\n"
     )
 
-    def run() -> tuple[bool, float]:
+    def run() -> Tuple[bool, float]:
         start = perf_counter()
         proc = subprocess.run(
             command.split(),
