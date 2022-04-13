@@ -83,6 +83,7 @@ class Config:
     # If test cases file is compressed, you don't need to extract it, just give name of
     # compressed file (with .gz extension)
     TEST_CASE_FILE = "test_cases.json.gz"
+    # TEST_CASE_FILE = "test_cases_b.json.gz"
 
     # If test cases input and expected output are in separate files, name of file
     # with expected outputs for test cases. Empty string - if they in one file.
