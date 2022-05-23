@@ -1,6 +1,6 @@
 # Challenge 104: Giant Slayer
 
-**Difficulty: 6/10** 
+**Difficulty: 6/10**  
 ***Demon Slayer Story Part 4***
 
 I look behind my back. A guy about six feet tall, just a bit taller than me, is standing about ten feet away. A relaxed yet trained to action stance that commands respect. “What you’ve just fought is a demon. But I trust you know that by now.”  
@@ -78,4 +78,4 @@ Code can be written in any of these languages:
 - `Rust` 1.60
 - `C#` 10 (.Net 6.0)
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_104)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenge/Challenge_104)
