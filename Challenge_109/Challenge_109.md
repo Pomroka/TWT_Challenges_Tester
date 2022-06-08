@@ -1,6 +1,20 @@
 # Challenge 109: Days Between, Part I
 
 **Difficulty: 3/10**  
+_**Demon Slayer Story Part 6**_
+
+“Thanks for holding on, I got held up” I looked up to the man talking to me. It was the same demon slayer I met that day.
+“H-how, what?” I babbled.
+“Are you still against joining the corps?”
+“Huh? I uhh…”
+“How about this, I’ll meet you after your next taekwondo class and you can tell me then?”
+“Sure…” After my next taekwondo class? “How do you know when-” He’d already gone.
+“You should join them!”
+I looked up, surprised to hear my little brother.
+“Then you could teach me all the cool stuff they can do!”
+I let out a chuckle, and looked up at my parents. They were both looking at me silently.
+“I’ll… think about it” My parents seemed to relax a bit.
+
 Given two dates (month and date, no year), calculate the number of months and the number of days between them.
 
 ## Task
