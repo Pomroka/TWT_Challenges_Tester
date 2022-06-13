@@ -411,6 +411,12 @@ def check_result(
                 print(f"   Expected: {green}{exp}{reset}\n")
         else:
             passed += 1
+
+    if num_cases + sum(x.count("\n") for x in test_out[:num_cases]) < len(output) - 1:
+        print(
+            f"{red}{emojis.warning}Your output has more lines than expected!{emojis.warning}\n"
+            f"Check if you don't print empty line at the end.{reset}\n"
+        )
     return passed, i
 
 
