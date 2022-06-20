@@ -1,6 +1,15 @@
 # Challenge 110: Missing Odd Number
 
 **Difficulty: 2/10**  
+_**Demon Slayer Story Part 7**_
+
+The next taekwondo class I was more tense than usual. Both appearances of the demon slayer were so far quite sudden. I didn’t know what exactly to expect this time. Would he just appear out of thin air? The class had just finished, and I was just walking out when I saw him waiting outside. “Rather decent of you to show up without it being a surprise for once.” I said rather pleased.
+“The first time I was already there, you simply hadn’t noticed me during your fight. The second time you were about to die, I didn’t think it was a good time for pleasantries.”
+“Right… well. I’ll join the corps.”
+“Oh? Well, that was easy.”
+“I don’t want to come back to another demon trying to kill my family, if joining the corps will solve that problem I’ll do it.”
+“Alright well, let’s wait until the end of the week so you can say your goodbyes to everyone at school, taekwondo, etc. Then I’ll come pick you up next Monday.”
+
 You are given all **odd** numbers between `1` and the `N`<sup>`th`</sup> odd number (inclusively) but one. Output the missing odd number.
 
 ## Task
