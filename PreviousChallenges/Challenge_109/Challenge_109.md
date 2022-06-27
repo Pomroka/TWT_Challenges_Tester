@@ -81,4 +81,4 @@ Code can be written in any of these languages:
 - `C#` 10 (.Net 6.0)
 - `JavaScript` ES2022 (Node.js 18.2)
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_109)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_109)
