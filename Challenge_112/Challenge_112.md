@@ -50,7 +50,7 @@ you are given an integer `x`, which represents the number of miles to complete.
 
 Challenge written by @KK1729
 
-Try to find a $\mathcal{O}(1)$ solution or a $\mathcal{O}(log(n))$ solution
+Try to find a `O(1)` solution or a `O(log(n))` solution
 
 ### Submissions
 

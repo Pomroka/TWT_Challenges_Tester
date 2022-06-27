@@ -10,7 +10,7 @@ You will find here my testers for weekly challenges.
 
 - [**How to use?**](#how-to-use)
 - [New tester (Challenge 73 and newer)](#new-tester-challenge-73-and-newer)
-  - [To test solution in languages other then Python](#to-test-solution-in-languages-other-then-python)
+  - [To test solution in languages other than Python](#to-test-solution-in-languages-other-than-python)
   - [Examples](#examples)
   - [Custom test cases](#custom-test-cases)
 - [**Supported Python version**](#supported-python-version)
@@ -29,7 +29,7 @@ Download tester file `test_challenge_XX.py` and file with test cases `test_cases
 Make sure Python has right to save to this folder.
 
 This tester will create one file `temp_solution_file.py` make sure there's no such
-file in same folder or there's nothing important in it cos it will be **overwritten!**
+file in same folder or there's nothing important in it, cos it will be **overwritten!**
 
 You can configure tester editing tester file and changing `CONFIGURATION` section or using command line arguments.
 
@@ -41,9 +41,9 @@ python test_challenge_112.py --help
 
 Change `SOLUTION_SRC_FILE_NAME` to your file name in `CONFIGURATION` section or use `-s solution_file.py`.
 
-### To test solution in languages other then Python
+### To test solution in languages other than Python
 
-Use `-c command` or change `OTHER_LANG_COMMAND` to command to run your solution for not compiled languages or to already compiled executable for compiled languages. For multiword `command` command line argument surround it in quotes `"multi word command"`
+Use `-c command` or change `OTHER_LANG_COMMAND` to command to run your solution for not compiled languages or to already compiled executable for compiled languages. For multi-word `command` command line argument surround it in quotes `"multi word command"`
 
 ### Examples
 
@@ -68,7 +68,7 @@ you may need to adjust other configuration settings. Read the comments on each.
 
 ### Custom test cases
 
-If you want use own test_cases, they must be in json format.
+If you want to use own test_cases, they must be in JSON Format.
 
 ```py
 [
@@ -87,7 +87,7 @@ If you want use own test_cases, they must be in json format.
 ]
 ```
 
-All values must be strings! Cast all ints, floats, etc. to str before dumping json!
+All values must be strings! Cast all ints, floats, etc. to string before dumping JSON!
 
 ## **Supported Python version**
 
@@ -134,20 +134,20 @@ Use empty input: `input()`
 
 - `None` in `"Your output"`: Your solution didn't print for all cases.
 
-- `None` in `"Input"`: Your solution print more times then there is cases.
+- `None` in `"Input"`: Your solution print more times than there are cases.
 
   - If you see `None` in `"Input"` or `"Your output"` don't check failed cases until you fix problem with printing, cos "Input" and "Your output" are misaligned after first missing/extra print
 
-- `"Your Output"` looks like `"Expected"` but tester show its wrong. Check if you print trailing spaces.
+- `"Your Output"` looks like `"Expected"` but tester show it's wrong. Check if you print trailing spaces.
 
-- `StopIteration`: Your solution try to get more input then there is test cases
+- `StopIteration`: Your solution try to get more input than there is test cases
 
   - If you use `open(0)` instead of `input` you get `StopIteration` error in my tester or tester will hang waiting for EOF char not presented in input data
   - to avoid this use one of:
     - set `OTHER_LANG_COMMAND = "python to_submit_ch_112.py"`
     - run `python test_challenge_112.py -c "python to_submit_ch_112.py"`
-- If you call your functions inside `if __name__ == '__main__':` your functions wont be called by default cos your solution is imported.
-  - to avoid this use one of:
+- If you call your functions inside `if __name__ == '__main__':` your functions won't be called by default cos your solution is imported.
+  - To avoid this use one of:
     - set `OTHER_LANG_COMMAND = "python to_submit_ch_112.py"`
     - run `python test_challenge_112.py -c "python to_submit_ch_112.py"`
     - or don't use `if __name__ == '__main__':`
