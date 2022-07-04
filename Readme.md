@@ -1,6 +1,6 @@
 # Testers for TechWithTim Discord weekly challenges
 
-[![latest](https://img.shields.io/badge/latest-Challenge--112-orange)](https://github.com/Pomroka/TWT_Challenges_Tester/releases/latest) [![Python version](https://img.shields.io/badge/python-3.6*%20%7C%203.7*%20%7C%203.8%20%7C%203.9%20%7C%203.10-blue)](#supported-python-version) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![latest](https://img.shields.io/badge/latest-Challenge--112-orange)](https://github.com/Pomroka/TWT_Challenges_Tester/releases/latest) [![Python version](https://img.shields.io/badge/python-3.6*%20%7C%203.7*%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](#supported-python-version) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ![TWT Logo](logo1.png "TWT Logo")
 
