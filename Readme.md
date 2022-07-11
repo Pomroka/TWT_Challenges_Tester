@@ -68,7 +68,7 @@ you may need to adjust other configuration settings. Read the comments on each.
 
 ### Custom test cases
 
-If you want use own test_cases, they must be in JSON format.
+If you want to use own test_cases, they must be in JSON format.
 
 ```py
 [
@@ -134,11 +134,11 @@ Use empty input: `input()`
 
 - `None` in `"Your output"`: Your solution didn't print for all cases.
 
-- `None` in `"Input"`: Your solution print more times than there is cases.
+- `None` in `"Input"`: Your solution print more times than there are cases.
 
   - If you see `None` in `"Input"` or `"Your output"` don't check failed cases until you fix problem with printing, cos "Input" and "Your output" are misaligned after first missing/extra print
 
-- `"Your Output"` looks like `"Expected"` but tester show its wrong. Check if you print trailing spaces.
+- `"Your Output"` looks like `"Expected"` but tester show it's wrong. Check if you print trailing spaces.
 
 - `StopIteration`: Your solution try to get more input than there is test cases
 
@@ -146,7 +146,7 @@ Use empty input: `input()`
   - to avoid this use one of:
     - set `OTHER_LANG_COMMAND = "python to_submit_ch_114.py"`
     - run `python test_challenge_114.py -c "python to_submit_ch_114.py"`
-- If you call your functions inside `if __name__ == '__main__':` your functions wont be called by default cos your solution is imported.
+- If you call your functions inside `if __name__ == '__main__':` your functions won't be called by default cos your solution is imported
   - to avoid this use one of:
     - set `OTHER_LANG_COMMAND = "python to_submit_ch_114.py"`
     - run `python test_challenge_114.py -c "python to_submit_ch_114.py"`
@@ -156,7 +156,7 @@ Use empty input: `input()`
 
 ## How to download individual challenge tester/file from GitHub?
 
-You can switch branch to branch with that challenge, than click `Code` and `Download ZIP`
+You can switch branch to branch with that challenge, then click `Code` and `Download ZIP`
 
 Or in **Releases** section click `Challenge XX` and download `source_code (...)`.
 
