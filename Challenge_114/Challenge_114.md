@@ -49,6 +49,7 @@ You are given a number `T` and `T` test cases follow, for each test case:
 
     ```rs
     c = [3, 4, 5, 1, 2]
+         ↕  ↕  ↕
     b = [3, 4, 5, 2, 1]
     ```
 
