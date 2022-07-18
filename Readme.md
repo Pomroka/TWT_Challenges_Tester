@@ -68,6 +68,8 @@ you may need to adjust other configuration settings. Read the comments on each.
 
 ### Custom test cases
 
+You can use test cases from official TWT challenge tester published after testing or in same format. Tester will convert them to format described below.
+
 If you want to use own test_cases, they must be in JSON format.
 
 ```py
