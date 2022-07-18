@@ -30,7 +30,7 @@ All values must be strings! Cast all ints, floats, etc. to str before dumping js
 
 WARNING: My tester ignores printing in input() but official tester FAILS if you
         print something in input()
-        Don't do that: input("What is the test number?") 
+        Don't do that: input("What is the test number?")
         Use empty input: input()
 
 Some possible errors:
@@ -42,7 +42,12 @@ Some possible errors:
     - StopIteration: Your solution try to get more input then there is test cases
     - If you use `open` instead of `input` you get `StopIteration` error in my tester
         to avoid that use OTHER_LANG_COMMAND = "python to_submit_ch_83.py"
+    - If you call your function inside `if __name__ == '__main__':` by default
+        your functions wont be called cos your solution is imported.
+        to avoid that use OTHER_LANG_COMMAND = "python to_submit_ch_83.py"
+        or don't use `if __name__ == '__main__':`
 """
+from __future__ import annotations
 
 from dataclasses import dataclass
 
@@ -61,7 +66,6 @@ class Config:
     #   Relative path to this script file
     # SOLUTION_SRC_FILE_NAME = "Rust/C83_rust/src/main.rs"
     #   File in same folder as this script
-    # SOLUTION_SRC_FILE_NAME = "to_submit_ch_87.py"
     SOLUTION_SRC_FILE_NAME = ""
 
     # Command to run your solution written in other language then Python
@@ -129,7 +133,7 @@ class Config:
 
     # Set to False if this tester wasn't prepared for the challenge you testing
     # or adjust prints in `print_extra_stat` function yourself
-    PRINT_EXTRA_STATS: bool = False
+    PRINT_EXTRA_STATS: bool = True
 
     # How often to update progress: must be > 0 and < 1
     # 0.1 - means update every 10% completed tests
@@ -148,7 +152,7 @@ class Config:
     USE_EMOJI: bool = False
 
 
-########################################################################
+# region #######################################################################
 
 import argparse
 import functools
@@ -167,10 +171,14 @@ from time import perf_counter
 from typing import Callable, List, Tuple
 from unittest import mock
 
+TestInp = List[List[str]]
+TestOut = List[str]
+TestCases = Tuple[TestInp, TestOut]
+
 
 def enable_win_term_mode() -> bool:
     win = platform.system().lower() == "windows"
-    if win == False:
+    if win is False:
         return True
 
     from ctypes import byref, c_int, c_void_p, windll
@@ -230,6 +238,9 @@ def create_solution_function(path: str, file_name: str) -> int:
 
     sol_len = sum(map(len, solution))
 
+    if not file_name.endswith(".py"):
+        return sol_len
+
     tmp_name = os.path.join(path, "temp_solution_file.py")
     with open(tmp_name, "w") as f:
         f.write("def solution():\n")
@@ -239,12 +250,12 @@ def create_solution_function(path: str, file_name: str) -> int:
     return sol_len
 
 
-def read_test_cases() -> Tuple[List[List[str]], List[str]]:
+def read_test_cases() -> TestCases:
     if test_cases_file.endswith(".gz"):
         with gzip.open(test_cases_file, "rb") as g:
             data = g.read()
         try:
-            test_inp = json.loads(data)
+            test_cases = json.loads(data)
         except json.decoder.JSONDecodeError:
             print(
                 f"Test case file {yellow}{test_cases_file}{reset} is not valid JSON file!"
@@ -253,7 +264,7 @@ def read_test_cases() -> Tuple[List[List[str]], List[str]]:
     else:
         with open(test_cases_file) as f:
             try:
-                test_inp = json.load(f)
+                test_cases = json.load(f)
             except json.decoder.JSONDecodeError:
                 print(
                     f"Test case file {yellow}{test_cases_file}{reset} is not valid JSON file!"
@@ -269,9 +280,26 @@ def read_test_cases() -> Tuple[List[List[str]], List[str]]:
                     f"Test case file {yellow}{test_out_file}{reset} is not valid JSON file!"
                 )
                 raise SystemExit(1)
+        test_inp = test_cases
     else:
-        test_out = test_inp[1]
-        test_inp = test_inp[0]
+        test_inp = test_cases[0]
+        test_out = test_cases[1]
+
+    if isinstance(test_cases[0], dict):
+        return convert_official_test_cases(test_cases)
+
+    return test_inp, test_out
+
+
+def convert_official_test_cases(test_cases: List[dict[str, str]]) -> TestCases:
+    test_inp, test_out = [], []
+    for case in test_cases:
+        try:
+            test_inp.append(case["Input"].split("\n"))
+            test_out.append(case["Output"])
+        except KeyError:
+            print(f"Test case {yellow}{case}{reset} is not valid format!")
+            raise SystemExit(1)
 
     return test_inp, test_out
 
@@ -299,31 +327,29 @@ class Lang(Enum):
     OTHER = auto()
 
 
-########################################################################
+# endregion ####################################################################
 
 
-def print_extra_stats(
-    test_inp: List[List[str]], test_out: List[str], num_cases: int
-) -> None:
-    """ You can print here some extra info about test cases.
-        For example maximum/minimum/average length of list or number value.
-        Set PRINT_EXTRA_STATS to True if you add them. 
-    """
+def print_extra_stats(test_inp: TestInp, test_out: TestOut, num_cases: int) -> None:
+    print(f" - Max N: {yellow}" f"{max(int(x[0]) for x in test_inp):_}{reset}")
     print(
-        f" - Min ...: {yellow}"
-        f"{min(int(x[0]) for x in test_inp):_}{reset}"
+        f" - Average N: {yellow}"
+        f"{sum(int(x[0]) for x in test_inp) // num_cases:_}{reset}"
     )
     print(
-        f" - Max ...: {yellow}"
-        f"{max(len(x[0].split()) for x in test_inp):_}{reset}"
+        f" - Max same positions: {yellow}" f"{max(int(x) for x in test_out):_}{reset}"
+    )
+    print(
+        f" - Average same positions: {yellow}"
+        f"{sum(int(x) for x in test_out) // num_cases:_}{reset}"
     )
 
 
 def print_begin(
     format: str,
     num_cases: int,
-    test_inp: List[List[str]],
-    test_out: List[str],
+    test_inp: TestInp,
+    test_out: TestOut,
     *,
     timeout: bool = False,
 ) -> None:
@@ -367,34 +393,40 @@ def print_summary(i: int, passed: int, time_taken: float) -> None:
         )
     e = f"{emojis.hundred}" if passed == i else f"{emojis.poo}"
     print(
-        f"\rPassed: {green if passed == i else red}{passed}/{i}{reset} tests{e}{emojis.bang}"
+        f"\rPassed: {green if passed == i else red}{passed:_}/{i:_}{reset} tests{e}{emojis.bang}"
     )
     print(f"{emojis.stopwatch}Finished in: {yellow}{time_taken:.4f}{reset} seconds")
 
 
 def print_speed_summary(speed_num_cases: int, loops: int, times: List[float]) -> None:
+    times.sort()
     print(
         f"\rTest for speed passed{emojis.hundred}{emojis.bang if emojis.bang else '!'}\n"
         f" - Total time: {yellow}{sum(times):.4f}"
         f"{reset} seconds to complete {cyan}{loops:_}{reset} times {cyan}"
-        f"{speed_num_cases}{reset} cases!"
+        f"{speed_num_cases:_}{reset} cases!"
     )
     print(
-        f" -{emojis.leopard} Fastest loop time: {yellow}{min(times):.4f}{reset} seconds /"
-        f" {cyan}{speed_num_cases}{reset} cases."
+        f" -{emojis.leopard} Average loop time from top {min(5, loops)} fastest: "
+        f"{yellow}{sum(times[:5])/min(5, loops):.4f}{reset} seconds /"
+        f" {cyan}{speed_num_cases:_}{reset} cases."
     )
     print(
-        f" - {emojis.snail}Slowest loop time: {yellow}{max(times):.4f}{reset} seconds /"
-        f" {cyan}{speed_num_cases}{reset} cases."
+        f" -{emojis.leopard} Fastest loop time: {yellow}{times[0]:.4f}{reset} seconds /"
+        f" {cyan}{speed_num_cases:_}{reset} cases."
+    )
+    print(
+        f" - {emojis.snail}Slowest loop time: {yellow}{times[-1]:.4f}{reset} seconds /"
+        f" {cyan}{speed_num_cases:_}{reset} cases."
     )
     print(
         f" - {emojis.stopwatch}Average loop time: {yellow}{sum(times)/loops:.4f}{reset} seconds"
-        f" / {cyan}{speed_num_cases}{reset} cases."
+        f" / {cyan}{speed_num_cases:_}{reset} cases."
     )
 
 
 def check_result(
-    test_inp: List[List[str]], test_out: List[str], num_cases: int, output: List[str]
+    test_inp: TestInp, test_out: TestOut, num_cases: int, output: List[str]
 ) -> Tuple[int, int]:
     passed = i = oi = 0
     for i, (inp, exp) in enumerate(
@@ -423,9 +455,7 @@ def check_result(
 ########################################################################
 
 
-def test_solution_aio(
-    test_inp: List[List[str]], test_out: List[str], num_cases: int
-) -> None:
+def test_solution_aio(test_inp: TestInp, test_out: TestOut, num_cases: int) -> None:
     test_inp_: List[str] = functools.reduce(operator.iconcat, test_inp[:num_cases], [])
 
     @mock.patch("builtins.input", side_effect=[str(num_cases)] + test_inp_)
@@ -447,7 +477,7 @@ def test_solution_aio(
 
 
 def speed_test_solution_aio(
-    test_inp: List[List[str]], test_out: List[str], speed_num_cases: int
+    test_inp: TestInp, test_out: TestOut, speed_num_cases: int
 ) -> None:
     test_inp_: List[str] = functools.reduce(
         operator.iconcat, test_inp[:speed_num_cases], []
@@ -490,9 +520,7 @@ def speed_test_solution_aio(
         print_speed_summary(speed_num_cases, loops, times)
 
 
-def test_solution_obo(
-    test_inp: List[List[str]], test_out: List[str], num_cases: int
-) -> None:
+def test_solution_obo(test_inp: TestInp, test_out: TestOut, num_cases: int) -> None:
     def test_obo(test: List[str]) -> Tuple[float, str]:
         @mock.patch("builtins.input", side_effect=test)
         def test_obo_(input: Callable) -> List[str]:
@@ -536,7 +564,7 @@ def test_solution_obo(
 
 
 def speed_test_solution_obo(
-    test_inp: List[List[str]], test_out: List[str], speed_num_cases: int
+    test_inp: TestInp, test_out: TestOut, speed_num_cases: int
 ) -> None:
     def test_for_speed_obo(test: List[str], out: str) -> Tuple[float, bool]:
         @mock.patch("builtins.input", side_effect=test)
@@ -590,9 +618,7 @@ def speed_test_solution_obo(
         print_speed_summary(speed_num_cases, loops, times)
 
 
-def debug_solution(
-    test_inp: List[List[str]], test_out: List[str], case_number: int
-) -> None:
+def debug_solution(test_inp: TestInp, test_out: TestOut, case_number: int) -> None:
     test = (
         ["1"] + test_inp[case_number - 1]
         if not Config.TEST_ONE_BY_ONE
@@ -620,6 +646,7 @@ def debug_solution(
     print("Your output:")
     if command:
         test_ = "1\n" + "\n".join(test_inp[case_number - 1])
+        start = perf_counter()
         proc = subprocess.run(
             command.split(),
             input=test_,
@@ -627,15 +654,17 @@ def debug_solution(
             stderr=subprocess.PIPE,
             universal_newlines=True,
         )
+        end = perf_counter()
         print(proc.stderr)
         print(proc.stdout)
+        print(f"\nTime: {yellow}{end - start}{reset} seconds")
 
     else:
         test_debug()  # type: ignore
 
 
 def test_other_lang(
-    command: str, test_inp: List[List[str]], test_out: List[str], num_cases: int
+    command: str, test_inp: TestInp, test_out: TestOut, num_cases: int
 ) -> None:
     test_inp_ = (
         f"{num_cases}\n"
@@ -668,15 +697,15 @@ def test_other_lang(
 
 
 def speed_test_other_aio(
-    command: str, test_inp: List[List[str]], test_out: List[str], speed_num_cases: int
+    command: str, test_inp: TestInp, test_out: TestOut, speed_num_cases: int
 ) -> None:
     test_inp_ = (
         f"{speed_num_cases}\n"
         + "\n".join(functools.reduce(operator.iconcat, test_inp[:speed_num_cases], []))
         + "\n"
     )
-    
-    def run() -> tuple[bool, float]:
+
+    def run() -> Tuple[bool, float]:
         start = perf_counter()
         proc = subprocess.run(
             command.split(),
@@ -686,7 +715,7 @@ def speed_test_other_aio(
             universal_newlines=True,
         )
         end = perf_counter()
-        
+
         err = proc.stderr
         output = proc.stdout.split("\n")
         output = [x.strip("\r") for x in output]
@@ -694,8 +723,11 @@ def speed_test_other_aio(
             print(err)
             raise SystemExit(1)
 
-        return "\n".join(output).strip() == "\n".join(test_out[:speed_num_cases]), end - start
-    
+        return (
+            "\n".join(output).strip() == "\n".join(test_out[:speed_num_cases]),
+            end - start,
+        )
+
     loops = max(1, Config.NUMER_OF_LOOPS)
     print("\nSpeed test started.")
     print(f"Running: {emojis.otter} {yellow}{command[command.rfind('/') + 1:]}{reset}")
@@ -919,7 +951,9 @@ def main(path: str) -> None:
         os.chdir(path)
         test_other_lang(Config.OTHER_LANG_COMMAND, test_inp, test_out, num_cases)
         if Config.SPEED_TEST:
-            speed_test_other_aio(Config.OTHER_LANG_COMMAND, test_inp, test_out, speed_num_cases)
+            speed_test_other_aio(
+                Config.OTHER_LANG_COMMAND, test_inp, test_out, speed_num_cases
+            )
         raise SystemExit(0)
 
     if Config.TEST_ONE_BY_ONE:
