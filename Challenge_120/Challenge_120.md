@@ -17,12 +17,11 @@ Given an integer `n`, output `F[n]`, the nth Fibonacci number, modulo `(10`<sup>
 
 You are given a number `T` and `T` test cases follow, for each test case:
 
-- The first line contains an integer `n`. 
+- The first line contains an integer `n`.
 
 Output `F[n] mod (10^9 + 7)`.
 
 ### Examples
-
 
 #### Input
 
