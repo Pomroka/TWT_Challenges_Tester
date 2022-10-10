@@ -51,7 +51,7 @@ An `O(N)` time complexity is enough to pass.
 This constraint will NOT be tested against your submission. This is only for an extra challenge to find a more efficient solution.
 `-10`<sup>`9`</sup>` <= a <= b <= 10`<sup>`9`</sup>
 
-Challenge suggested by @KK1729 
+Challenge suggested by @KK1729
 
 ### Submissions
 
@@ -66,4 +66,4 @@ Code can be written in any of these languages:
 - `C#` 10 (.Net 6.0)
 - `JavaScript` ES2022 (Node.js 18.2)
 
-To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_124)
+To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/PreviousChallenges/Challenge_124)
