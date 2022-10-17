@@ -1,0 +1,3 @@
+[submodule "PreviousChallenges"]
+	path = PreviousChallenges
+	url = https://github.com/Pomroka/PreviousChallenges.git
