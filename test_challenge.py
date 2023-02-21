@@ -4,14 +4,14 @@ Put this file, with test cases file and file with your solution in same folder.
 Make sure Python has right to save to this folder.
 
 This tester will create one file "temp_solution_file.py" make sure there's no such
-file in same folder or there's nothing important in it cos it will be overwritten!
+file in same folder or there's nothing important in it, cos it will be overwritten!
 
 Change SOLUTION_SRC_FILE_NAME to your file name in CONFIGURATION section.
 
 If this tester wasn't prepared by me for the challenge you want to test,
 you may need to adjust other configuration settings. Read the comments on each.
 
-If you want use own test_cases, they must be in json format.
+If you want to use own test_cases, they must be in JSON format.
 [
   [ # this list can be in separated file for inputs only
     ["test case 1"], # multiline case ["line_1", "line_2", ... ,"line_n"]
@@ -26,7 +26,7 @@ If you want use own test_cases, they must be in json format.
     "output n"
   ]
 ]
-All values must be strings! Cast all ints, floats, etc. to str before dumping json!
+All values must be strings! Cast all ints, floats, etc. to string before dumping JSON!
 
 WARNING: My tester ignores printing in input() but official tester FAILS if you
         print something in input()
@@ -35,16 +35,16 @@ WARNING: My tester ignores printing in input() but official tester FAILS if you
 
 Some possible errors:
     - None in "Your output": Your solution didn't print for all cases.
-    - None in "Input": Your solution print more times then there is cases.
+    - None in "Input": Your solution print more times than there are cases.
     - If you see None in "Input" or "Your output" don't check failed cases until
         you fix problem with printing, cos "Input" and "Your output" are misaligned
         after first missing/extra print
-    - StopIteration: Your solution try to get more input then there is test cases
+    - StopIteration: Your solution try to get more input than there are test cases
     - If you use `open` instead of `input` you get `StopIteration` error in my tester
         to avoid that use OTHER_LANG_COMMAND = "python to_submit_ch_83.py"
     - If you call your function inside `if __name__ == '__main__':` by default
-        your functions wont be called cos your solution is imported.
-        to avoid that use OTHER_LANG_COMMAND = "python to_submit_ch_83.py"
+        your functions won't be called cos your solution is imported.
+        To avoid that use OTHER_LANG_COMMAND = "python to_submit_ch_83.py"
         or don't use `if __name__ == '__main__':`
 """
 from __future__ import annotations
@@ -56,9 +56,9 @@ from dataclasses import dataclass
 @dataclass
 class Config:
 
-    # Name of your file with solution. If its not in same folder as this script
+    # Name of your file with solution. If it's not in same folder as this script
     # add absolute path or relative to this script file.
-    # For other languages then python fill this with source code file name if
+    # For other languages than python fill this with source code file name if
     # you want solution length to be displayed.
     # Examples:
     #   Absolute path
@@ -68,8 +68,8 @@ class Config:
     #   File in same folder as this script
     SOLUTION_SRC_FILE_NAME = ""
 
-    # Command to run your solution written in other language then Python
-    # For compiled languages compile yourself and use compiled executable file name
+    # Command to run your solution written in other language than Python
+    # For compiled languages - compile yourself and use compiled executable file name
     # For interpreter languages give full command to run your solution
     # Examples:
     # OTHER_LANG_COMMAND = "c83_cpp.exe"
@@ -80,7 +80,7 @@ class Config:
     # OTHER_LANG_COMMAND = "java -cp Java/ c83_java.Main"
     OTHER_LANG_COMMAND = ""
 
-    # Name of file with inputs test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
+    # Name of file with input test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
     # If test cases file is compressed, you don't need to extract it, just give name of
     # compressed file (with .gz extension)
     TEST_CASE_FILE = "test_cases.json"
@@ -112,7 +112,7 @@ class Config:
     # once and your solution need to take care of it.
     TEST_ONE_BY_ONE: bool = False
 
-    # True - if you want test your solution one test case by one test case, and solution
+    # True - if you want to test your solution one test case by one test case, and solution
     # is written to take all test cases at once, this will add "1" as the first line input
     # Ignored if TEST_ONE_BY_ONE is False
     ADD_1_IN_OBO: bool = False
@@ -120,7 +120,7 @@ class Config:
     # True - if you want to measure performance of your solution, running it multiple times
     SPEED_TEST: bool = False
 
-    # How many test case to use per loop, same rules apply as for NUMBER_OF_TEST_CASES
+    # How many test cases to use per loop, same rules apply as for NUMBER_OF_TEST_CASES
     NUMBER_SPEED_TEST_CASES = -1
 
     # How many times run tests
@@ -131,7 +131,7 @@ class Config:
     # If you don't want timeout set it to some big number or `float("inf")`
     TIMEOUT = 300
 
-    # Set to False if this tester wasn't prepared for the challenge you testing
+    # Set to False if this tester wasn't prepared for the challenge you're testing
     # or adjust prints in `print_extra_stat` function yourself
     PRINT_EXTRA_STATS: bool = True
 
@@ -147,7 +147,7 @@ class Config:
     # Set to False if you want to share result but don't want to share solution length
     PRINT_SOLUTION_LENGTH: bool = True
 
-    # If your terminal support unicode and your font has glyphs for emoji you can
+    # If your terminal support Unicode and your font has glyphs for emoji you can
     # switch to True
     USE_EMOJI: bool = False
 
