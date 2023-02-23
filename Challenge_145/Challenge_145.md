@@ -16,7 +16,7 @@ You are given a number `T` and `T` test cases follow, for each test case:
     For each query you are given 3 numbers. First `t` denoting the type of query:
 
   - If `t` is `1` you are given two integers `x` and `y` denoting the indices of the elements to be swapped
-  - If `t` is `2` you are given an integer `x`, and you have to output the element at index `x`. If there is more than one type `2` query, print all `x`'s in same line space separated.
+  - If `t` is `2` you are given an integer `x`, and you have to output the element at index `x`. If there is more than one type `2` query, print `x`'s in new line.
 
 ### Examples
 
