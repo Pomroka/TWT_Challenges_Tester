@@ -49,10 +49,10 @@ With the promotion "Buy One, Get One Free" event going on, output a single integ
 
 ### Note
 
-`1 <= T`
-`0 <= N <= 10`<sup>`9`</sup>
-`0 <= C <= 10`<sup>`9`</sup>
-`N * C <= 10`<sup>`9`</sup>
+`1 <= T`  
+`0 <= N <= 10`<sup>`9`</sup>  
+`0 <= C <= 10`<sup>`9`</sup>  
+`N * C <= 10`<sup>`9`</sup>  
 
 ### Submissions
 
