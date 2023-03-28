@@ -48,7 +48,7 @@ Output a single integer, the maximum value of (Nhoj - John), where Nhoj is Nhoj'
 
 ```rust
 2
-0
+1
 -1
 2
 1
