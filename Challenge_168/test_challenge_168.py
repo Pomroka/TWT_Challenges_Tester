@@ -84,7 +84,7 @@ class Config:
     # If test cases file is compressed, you don't need to extract it, just give name of
     # compressed file (with .gz extension)
     TEST_CASE_FILE = "test_cases.json"     # Max string len 995 - 1000 cases
-    TEST_CASE_FILE = "test_cases.json.gz"  # Max string len 94_685 - 100 cases
+    # TEST_CASE_FILE = "test_cases.json.gz"  # Max string len 94_685 - 100 cases
 
     # If test cases input and expected output are in separate files, name of file
     # with expected outputs for test cases. Empty string - if they in one file.
