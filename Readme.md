@@ -1,6 +1,6 @@
 # Testers for TechWithTim Discord weekly challenges
 
-[![latest](https://img.shields.io/badge/latest-Challenge--167-orange)](https://github.com/Pomroka/TWT_Challenges_Tester/releases/latest) [![Python version](https://img.shields.io/badge/python-3.6*%20%7C%203.7*%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](#supported-python-version) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![latest](https://img.shields.io/badge/latest-Challenge--168-orange)](https://github.com/Pomroka/TWT_Challenges_Tester/releases/latest) [![Python version](https://img.shields.io/badge/python-3.6*%20%7C%203.7*%20%7C%203.8%20%7C%203.9%20%7C%203.10%20%7C%203.11-blue)](#supported-python-version) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 
 ![TWT Logo](logo1.png "TWT Logo")
 
@@ -37,7 +37,7 @@ You can configure tester editing tester file and changing `CONFIGURATION` sectio
 Run with flag `-h` or `--help` for more information how to use command line arguments.
 
 ```sh
-python test_challenge_167.py --help
+python test_challenge_168.py --help
 ```
 
 Change `SOLUTION_SRC_FILE_NAME` to your file name in `CONFIGURATION` section or use `-s solution_file.py`.
@@ -49,17 +49,17 @@ Use `-c command` or change `OTHER_LANG_COMMAND` to command to run your solution 
 ### Examples
 
 ```py
-OTHER_LANG_COMMAND = "Cpp/c167_cpp.exe"  # relative to tester file path to compiled windows executable
-OTHER_LANG_COMMAND = "/home/user/Dev/Challenge167/c167_c"  # absolute path to compiled Linux executable
-OTHER_LANG_COMMAND = "c167_rust.exe"  # name of compiled file in same folder as tester
-OTHER_LANG_COMMAND = "java -cp Java/ c167_java.Main"  # command to run solution in non compiled language
+OTHER_LANG_COMMAND = "Cpp/c168_cpp.exe"  # relative to tester file path to compiled windows executable
+OTHER_LANG_COMMAND = "/home/user/Dev/Challenge168/c168_c"  # absolute path to compiled Linux executable
+OTHER_LANG_COMMAND = "c168_rust.exe"  # name of compiled file in same folder as tester
+OTHER_LANG_COMMAND = "java -cp Java/ c168_java.Main"  # command to run solution in non compiled language
 OTHER_LANG_COMMAND = ""  # leave empty if you want to test python solution
 ```
 
 ```sh
-> python test_challenge_167.py -c "java -cp Java/ c167_java.Main"
+> python test_challenge_168.py -c "java -cp Java/ c168_java.Main"
 
-$ python test_challenge_167.py -c Rust/c167_rust/target/release/c167_rust
+$ python test_challenge_168.py -c Rust/c168_rust/target/release/c168_rust
 ```
 
 If you want to see your solution length in other languages than Python change `SOLUTION_FILE_NAME` to your solution source code file name.
@@ -147,12 +147,12 @@ Use empty input: `input()`
 
   - If you use `open(0)` instead of `input` you get `StopIteration` error in my tester or tester will hang waiting for EOF char not presented in input data
   - to avoid this use one of:
-    - set `OTHER_LANG_COMMAND = "python to_submit_ch_167.py"`
-    - run `python test_challenge_167.py -c "python to_submit_ch_167.py"`
+    - set `OTHER_LANG_COMMAND = "python to_submit_ch_168.py"`
+    - run `python test_challenge_168.py -c "python to_submit_ch_168.py"`
 - If you call your functions inside `if __name__ == '__main__':` your functions won't be called by default cos your solution is imported
   - to avoid this use one of:
-    - set `OTHER_LANG_COMMAND = "python to_submit_ch_167.py"`
-    - run `python test_challenge_167.py -c "python to_submit_ch_167.py"`
+    - set `OTHER_LANG_COMMAND = "python to_submit_ch_168.py"`
+    - run `python test_challenge_168.py -c "python to_submit_ch_168.py"`
     - or don't use `if __name__ == '__main__':`
 
 ----------
@@ -167,10 +167,10 @@ Or from command line:
 
 ```sh
 # Linux
-$ wget https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_167/test_cases.json
+$ wget https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_168/test_cases.json
 
 # Windows 10
-> curl -o test_cases.json https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_167/test_cases.json
+> curl -o test_cases.json https://raw.githubusercontent.com/Pomroka/TWT_Challenges_Tester/master/Challenge_168/test_cases.json
 ```
 
 Or use [https://downgit.github.io/#/home](https://downgit.github.io/#/home) (ready to use link in Challenge_XX.md)
