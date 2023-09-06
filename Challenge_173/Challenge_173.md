@@ -3,7 +3,9 @@
 **Difficulty: 3/10  
 Labels: Binary Search or Prefix Sum or Dynamic Programming or Data Structures**
 
-Consider the attached image. A tower is constructed such that row k has k boxes, and all boxes are aligned to the center. Number the boxes from top-to-bottom, then left-to-right. Call this the **label** of the box. Tim is testing out his water gun. When Tim knocks out a box, it falls, then all boxes directly above it falls, and all boxes directly above those falls, until box 1 falls. For example, if Tim hits box 9, the highlighted boxes would fall.
+Consider the attached image.
+![Tower](img.png)
+A tower is constructed such that row k has k boxes, and all boxes are aligned to the center. Number the boxes from top-to-bottom, then left-to-right. Call this the **label** of the box. Tim is testing out his water gun. When Tim knocks out a box, it falls, then all boxes directly above it falls, and all boxes directly above those falls, until box 1 falls. For example, if Tim hits box 9, the highlighted boxes would fall.
 
 Tim hits box `n`. Compute the sum of the labels of all boxes that will fall. In the image, it is `9+5+6+2+3+1 = 26`.
 
