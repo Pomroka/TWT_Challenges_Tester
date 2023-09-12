@@ -18,6 +18,7 @@ For this challenge, determine the minimum number of such operations on `s` neede
 You are given a number `T` and `T` test cases follow, for each test case:
 
 - The only line contains an integer `n`.
+
 Output a single integer, the minimum number of such operations needed on the normal binary representation of `n` so that it has a density of 1.
 
 ### Examples
