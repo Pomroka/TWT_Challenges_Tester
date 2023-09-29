@@ -13,6 +13,7 @@ Find the minimum value of `g(x)` over its domain, **rounded to five decimal plac
 You are given a number `T` and `T` test cases follow, for each test case:
 
 - The only line contains three integers, `a`, `b`, and `c`, separated by single spaces.
+
 Output a number with exactly 5 decimal places, the minimum of `g(x)` where `0 < x < π/2` rounded to 5 decimal places.
 
 ### Examples
@@ -46,7 +47,7 @@ Explanation: <https://www.desmos.com/calculator/llanicyi5q>
 
 `1 <= T`
 `1 <= a, b, c <= 25`
-It can be shown that for the given constraints, there exists a unique answer, and 3 < answer < 85.
+It can be shown that for the given constraints, there exists a unique answer, and `3 < answer < 85`.
 Please, do not ruin your day by finding the derivative and solving `dg/dx = 0`.
 
 ### Submissions
