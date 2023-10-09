@@ -56,7 +56,8 @@ Output a single integer, the minimum cost to win by destroying one city. If it i
 ## Note
 
 - `1 <= T`
-- `1 <= n, m <= 10`<sub>`4`</sub>
+- `2 <= n <= 10`<sub>`4`</sub>
+- `1 <= m <= 10`<sub>`4`</sub>
 - `1 <= Cost[i] <= 10`<sub>`9`</sub>
 - `1 <= a, b <= n`
 - Each tunnel is distinct.
