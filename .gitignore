@@ -1,0 +1,8 @@
+*.code-workspace
+.vscode/
+.venv/
+.pytest_cache/
+__pycache__/
+logo.ascii
+logo2.png
+publi.sh
