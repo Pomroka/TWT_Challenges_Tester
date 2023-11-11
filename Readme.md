@@ -8,16 +8,15 @@ You will find here my testers for weekly challenges.
 
 ----------
 
-- [Testers for TechWithTim Discord weekly challenges](#testers-for-techwithtim-discord-weekly-challenges)
-  - [**How to use?**](#how-to-use)
-  - [New tester (Challenge 73 and newer)](#new-tester-challenge-73-and-newer)
-    - [To test solution in languages other than Python](#to-test-solution-in-languages-other-than-python)
-    - [Examples](#examples)
-    - [Custom test cases](#custom-test-cases)
-  - [**Supported Python version**](#supported-python-version)
-  - [Old tester (Challenge 72 and older)](#old-tester-challenge-72-and-older)
-  - [Some possible errors](#some-possible-errors)
-  - [How to download individual challenge tester/file from GitHub?](#how-to-download-individual-challenge-testerfile-from-github)
+- [**How to use?**](#how-to-use)
+- [New tester (Challenge 73 and newer)](#new-tester-challenge-73-and-newer)
+  - [To test solution in languages other than Python](#to-test-solution-in-languages-other-than-python)
+  - [Examples](#examples)
+  - [Custom test cases](#custom-test-cases)
+- [**Supported Python version**](#supported-python-version)
+- [Old tester (Challenge 72 and older)](#old-tester-challenge-72-and-older)
+- [Some possible errors](#some-possible-errors)
+- [How to download individual challenge tester/file from GitHub?](#how-to-download-individual-challenge-testerfile-from-github)
 
 ----------
 
