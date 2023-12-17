@@ -83,7 +83,8 @@ class Config:
     # Name of file with input test cases (and output if SEP_INP_OUT_TESTCASE_FILE is False)
     # If test cases file is compressed, you don't need to extract it, just give name of
     # compressed file (with .gz extension)
-    TEST_CASE_FILE = "test_cases.json"
+    # TEST_CASE_FILE = "test_cases.json"    # max N ~45k
+    TEST_CASE_FILE = "test_cases_b.json"    # max N ~978k
 
     # If test cases input and expected output are in separate files, name of file
     # with expected outputs for test cases. Empty string - if they in one file.
@@ -335,8 +336,8 @@ class Lang(Enum):
 
 
 def print_extra_stats(test_inp: TestInp, test_out: TestOut, num_cases: int) -> None:
-    max_n = max(len(x[0]) for x in test_inp)
-    avg_n = sum(len(x[0]) for x in test_inp) // num_cases
+    max_n = max(int(x[0]) for x in test_inp)
+    avg_n = sum(int(x[0]) for x in test_inp) // num_cases
 
     print(f" - Max N: {yellow}{max_n:_}{reset}")
     print(f" - Average N: {yellow}{avg_n:_}{reset}")
