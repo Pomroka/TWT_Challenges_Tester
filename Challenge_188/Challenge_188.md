@@ -65,6 +65,6 @@ For test case 1:
 
 ## Extra Challenge
 
-Can you find a $\mathcal(O)(n \log(n))$ solution?
+Can you find a $\mathcal{O}(n \log(n))$ solution?
 
 To download tester for this challenge click [here](https://downgit.github.io/#/home?url=https://github.com/Pomroka/TWT_Challenges_Tester/tree/main/Challenge_188)
