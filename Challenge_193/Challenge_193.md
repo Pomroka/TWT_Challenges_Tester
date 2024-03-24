@@ -3,8 +3,10 @@
 **Difficulty: 2/10  
 Labels: String Searching, Regex**
 
-Tim noticed that when a number is too long, it is impossible to read. For example, Tim found it difficult to compare 1000000000000 and 5358523495841.
-We can solve this issue by splitting the number with a comma every three digits from the right. For example, the above numbers would be written as 1,000,000,000,000 and 5,358,523,495,841. Now it is clear that the latter is larger.
+Tim noticed that when a number is too long, it is impossible to read. For example, Tim found it difficult to compare `1000000000000` and `5358523495841`.
+
+We can solve this issue by splitting the number with a comma every three digits from the right. For example, the above numbers would be written as `1,000,000,000,000` and `5,358,523,495,841`. Now it is clear that the latter is larger.
+
 Tim requests you to write a program to automatically convert all numbers in a sentence to this form.
 
 ## Task
